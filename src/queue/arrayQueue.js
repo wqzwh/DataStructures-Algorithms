@@ -11,7 +11,7 @@
 const CArray = require('../array/index')
 const Queue = require('./queue')
 class ArrayQueue extends Queue {
-  custructor(capacity) {
+  constructor(capacity) {
     super()
     this.array = new CArray(capacity)
   }

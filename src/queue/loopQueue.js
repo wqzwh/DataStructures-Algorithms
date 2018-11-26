@@ -7,7 +7,7 @@
  */
 const resize = Symbol('resize')
 class ArrayQueue {
-  custructor(capacity) {
+  constructor(capacity) {
     this.data = Array(capacity + 1)
     this.front = 0 // 对首位置
     this.tail = 0 // 队尾位置

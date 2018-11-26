@@ -4,7 +4,7 @@
  */
 
 class Node {
-  custructor(element, next = null) {
+  constructor(element, next = null) {
     this.element = element
     this.next = next
   }
@@ -14,9 +14,15 @@ class Node {
   }
 }
 
-
+const size = Symbol('size')
 class LList {
-  custructor() {
-    this.head = new Node("head")
+  constructor() {
+    this.head = null
+    this[size] = 0
+  }
+
+  // 获取链表元素的个数
+  getSize() {
+    return this[size]
   }
 }
