@@ -2,7 +2,7 @@
  *
  * 循环队列
  * front === tail  队列空了
- * (tail + 1) / data.length === front 队列已经满了
+ * (tail + 1) % data.length === front 队列已经满了
  *
  */
 const resize = Symbol('resize')
@@ -16,12 +16,12 @@ class ArrayQueue {
 
   // 入队方法
   enqueue(element) {
-    if((this.tail + 1) / this.data.length === this.front) {
+    if((this.tail + 1) % this.data.length === this.front) {
       this[resize](this.getCapacity() * 2)
     }
 
     this.data[this.tail] = element
-    this.tail= ( this.tail + 1 ) % this.data.length
+    this.tail = ( this.tail + 1 ) % this.data.length
     this.size++
   }
 
