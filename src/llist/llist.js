@@ -24,7 +24,9 @@ class Node {
 const size = Symbol('size')
 class LList {
   constructor() {
-    this.head = null
+    // this.head = null
+    // 通过增加假头，这样可以不用区分因添加元素位置不同逻辑不同
+    this.dummyHead = new Node(null)
     this[size] = 0
   }
 
@@ -39,16 +41,6 @@ class LList {
   }
 
   /** 
-   * 链表头增加元素
-   * node.next = head
-   * head = node
-  */
-  addFirst(element) {
-    this.head = new Node(element, this.head)
-    this[size]++
-  }
-
-  /** 
    * 
    * 链表index位置添加元素
    * node.next = prev.next
@@ -57,16 +49,21 @@ class LList {
    * */ 
   add(index, element) {
     if(index < 0 || index > this[size]) throw '不合法'
-    if(index === 0) {
-      this.addFirst(element)
-    } else {
-      let prev = this.head
-      for(let i = 0; i < index - 1; i++) {
-        prev = prev.next
-      }
-      prev.next = new Node(element, prev.next)
-      this[size]++
+    let prev = this.dummyHead
+    for(let i = 0; i < index; i++) {
+      prev = prev.next
     }
+    prev.next = new Node(element, prev.next)
+    this[size]++
+  }
+
+  /** 
+   * 链表头增加元素
+   * node.next = head
+   * head = node
+  */
+  addFirst(element) {
+    this.add(0, element)
   }
 
   // 向链表末尾添加元素
