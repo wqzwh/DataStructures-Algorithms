@@ -45,7 +45,7 @@ class LList {
   */
   addFirst(element) {
     this.head = new Node(element, this.head)
-    this.size++
+    this[size]++
   }
 
   /** 
@@ -60,18 +60,20 @@ class LList {
     if(index === 0) {
       this.addFirst(element)
     } else {
-      let prev = new Node('head')
+      let prev = this.head
       for(let i = 0; i < index - 1; i++) {
         prev = prev.next
       }
       prev.next = new Node(element, prev.next)
+      this[size]++
     }
-    this.size++
   }
 
   // 向链表末尾添加元素
   addLast(element) {
-    this.add(this.size, element)
+    this.add(this[size], element)
   }
 
 }
+
+module.exports = LList
