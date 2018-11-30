@@ -1,6 +1,6 @@
 /**
  *
- * 匹配括号
+ * 20. 有效的括号
  *
  */
 const CArray = require('../src/array/index')
