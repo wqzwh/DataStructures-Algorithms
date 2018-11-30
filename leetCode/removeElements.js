@@ -49,3 +49,21 @@ const removeElements = (head, val) => {
   }
   return dummyHead.next
 }
+
+/**
+ *
+ * 使用递归实现
+ *
+ */
+const removeElements = (head, val) => {
+  if(head === null) return head
+
+  let res = removeElements(head.next, val)
+
+  if(head.val === val) {
+    return res
+  } else {
+    head.next = res
+    return head
+  }
+}
