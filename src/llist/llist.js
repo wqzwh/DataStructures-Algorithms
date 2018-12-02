@@ -10,11 +10,11 @@ class Node {
   }
 }
 
-/** 
- * 
+/**
+ *
  * node.next = head
  * head = node
- * 
+ *
 */
 
 const size = Symbol('size')
@@ -36,13 +36,13 @@ class LList {
     return this[size] === 0
   }
 
-  /** 
-   * 
+  /**
+   *
    * 链表index位置添加元素
    * node.next = prev.next
    * prev.next = node
    * 时间复杂度均为O(n)
-   * */ 
+   * */
   add(index, element) {
     if(index < 0 || index > this[size]) throw '不合法'
     let prev = this.dummyHead
@@ -53,7 +53,7 @@ class LList {
     this[size]++
   }
 
-  /** 
+  /**
    * 链表头增加元素
    * node.next = head
    * head = node
@@ -135,6 +135,20 @@ class LList {
   // 时间复杂度均为O(n)
   removeLast() {
     return this.remove(this[size] - 1)
+  }
+
+  // 根据元素删除
+  removeElement(element) {
+    if(!this.contains(element)) return
+    let cur = this.dummyHead.next
+    while(cur !== null) {
+      if(cur.next.element === element) {
+        let retNode = cur.next
+        cur.next = retNode.next
+        retNode.next = null
+        return retNode
+      }
+    }
   }
 
   toString() {
