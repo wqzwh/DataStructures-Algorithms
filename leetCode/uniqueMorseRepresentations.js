@@ -1,3 +1,14 @@
+/**
+ *
+ * 804. 唯一摩尔斯密码词
+ *
+ */
+
+/**
+ * @param {string[]} words
+ * @return {number}
+ */
+
 
 /**
  *
@@ -12,8 +23,8 @@ class Node {
   }
 }
 
-const Stack = require('../stack/arrayStack')
-const QueueList = require('../llist/queueList')
+// const Stack = require('../stack/arrayStack')
+// const QueueList = require('../llist/queueList')
 const _add = Symbol('_add')
 const _contains = Symbol('_contains')
 const _preOrder = Symbol('_preOrder')
@@ -31,7 +42,7 @@ class BST {
   }
 
   // 查看树的元素个数
-  size() {
+  getSize() {
     return this.size
   }
 
@@ -261,4 +272,51 @@ class BST {
       return successor
     }
   }
+}
+
+
+class BSTSet {
+  constructor() {
+    this.bst = new BST()
+  }
+
+  // 添加元素
+  // 不能添加重复元素
+  add(element) {
+    this.bst.add(element)
+  }
+
+  // 删除元素
+  remove(element) {
+    this.bst.remove(element)
+  }
+
+  // 是否包含元素
+  contains(element) {
+    return this.bst.contains(element)
+  }
+
+  // 获取集合的个数
+  getSize() {
+    return this.bst.getSize()
+  }
+
+  // 是否为空
+  isEmpty() {
+    return this.bst.isEmpty()
+  }
+}
+
+const uniqueMorseRepresentations = (words) => {
+  const codes = [".-","-...","-.-.","-..",".","..-.","--.","....","..",".---","-.-",".-..","--","-.","---",".--.","--.-",".-.","...","-","..-","...-",".--","-..-","-.--","--.."]
+  let treeSet = new BSTSet()
+
+  for(let v of words) {
+    let str = ''
+    for(let i = 0; i < v.length; i++) {
+      str += codes[v.charCodeAt(i) - 'a'.charCodeAt()]
+    }
+    treeSet.add(str)
+  }
+  return treeSet.getSize()
 }
