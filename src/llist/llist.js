@@ -146,9 +146,12 @@ class LList {
         let retNode = cur.next
         cur.next = retNode.next
         retNode.next = null
+        this[size]--
         return retNode
       }
+      cur = cur.next
     }
+    return null
   }
 
   toString() {
