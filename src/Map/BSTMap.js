@@ -33,7 +33,7 @@ class BSTMap {
   }
 
   add(key, value) {
-    this[_add](this.root, key, value)
+    this.root = this[_add](this.root, key, value)
   }
 
   [_add](node, key, value) {
