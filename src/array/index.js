@@ -2,7 +2,7 @@ const resize = Symbol('resize')
 class CArray {
   // capacity 数组容量
   constructor(capacity = 10) {
-    this.data = Array(capacity)
+    this.data = new Array(capacity)
     this.size = 0 // 数组元素个数
   }
 
@@ -145,6 +145,14 @@ class CArray {
       newData[i] = this.data[i]
     }
     this.data = newData
+  }
+
+  // 交换i，j两个索引的位置
+  swap(i, j) {
+    if(i < 0 || i >= this.size || j < 0 || j >= this.size) return '序号不存在'
+    let t = this.data[i]
+    this.data[i] = this.data[j]
+    this.data[j] = t
   }
 }
 
