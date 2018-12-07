@@ -82,6 +82,22 @@ class MaxHeap {
       k = j
     }
   }
+
+  // 取出堆中最的元素，并且替换成元素element
+  replace(element) {
+    let ret = this.findMax()
+    this.data.set(0, ret)
+    this[_siftDowm](0)
+    return ret
+  }
+
+  // 将任意数组整理成堆的形状
+  heapify(arr) {
+    this.data = arr
+    for(let i = this[_parentIndex](arr.length - 1); i >= 0; i--){
+      this[_siftDowm](i)
+    }
+  }
 }
 
 
