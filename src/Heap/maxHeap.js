@@ -11,6 +11,7 @@ const _parentIndex = Symbol('_parentIndex')
 const _leftChildIndex = Symbol('_leftChildIndex')
 const _rightChildIndex = Symbol('_rightChildIndex')
 const _siftUp = Symbol('_siftUp')
+const _siftDowm = Symbol('_siftDowm')
 class MaxHeap {
   constructor(capacity) {
     this.data = new CArray(capacity)
@@ -50,6 +51,35 @@ class MaxHeap {
     while(index > 0 && this.data.get(this[_parentIndex](index)) < this.data.get(index)) {
       this.data.swap(index, this[_parentIndex])
       index = this[_parentIndex](index)
+    }
+  }
+
+  // 找到堆中最大的元素
+  findMax() {
+    if(this.data.getSize()) return '堆为空'
+    return this.data.get(0)
+  }
+
+  // 取出堆中最大元素
+  extractMax() {
+    let ret = this.findMax()
+    this.data.swap(0, this.data.getSize() - 1)
+    this.data.removeLast()
+    this[_siftDowm](0)
+    return ret
+  }
+
+  [_siftDowm](index) {
+    while(this[_leftChildIndex](index) < this.data.getSize()) {
+      let j = this[_leftChildIndex](index)
+      if(j + 1 < this.data,getSize() && this.data.get(j + 1) > this.data.get(j)) {
+        j = this[_rightChildIndex](j)
+      }
+      if(this.data.get(index) > this.data.get(j)) {
+        break
+      }
+      this.data.swap(k, j)
+      k = j
     }
   }
 }
