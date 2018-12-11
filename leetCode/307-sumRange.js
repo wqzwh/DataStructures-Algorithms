@@ -1,5 +1,11 @@
 /**
  *
+ * 307 区域和检索 - 数组可修改
+ *
+ */
+
+/**
+ *
  * 线段树
  *
  */
@@ -137,3 +143,44 @@ class SegmentTree {
     this[_tree][treeIndex] = this.merge(this[_tree][leftTreeIndex], this[_tree][rightTreeIndex])
   }
 }
+
+
+/**
+ * @param {number[]} nums
+ */
+var NumArray = function(nums) {
+  let data = []
+  if(nums.length > 0) {
+    for(let i = 0; i < nums.length; i++) {
+      data[i] = nums[i]
+    }
+    this.segTree = new SegmentTree(data, (a, b) => a + b)
+  }
+};
+
+/**
+ * @param {number} i
+ * @param {number} val
+ * @return {void}
+ */
+NumArray.prototype.update = function(i, val) {
+  if(this.segTree === null) return '线段树是空'
+  return this.segTree.set(i, val)
+};
+
+/**
+ * @param {number} i
+ * @param {number} j
+ * @return {number}
+ */
+NumArray.prototype.sumRange = function(i, j) {
+  if(this.segTree === null) return '线段树是空'
+  return this.segTree.query(i, j)
+};
+
+/**
+ * Your NumArray object will be instantiated and called as such:
+ * var obj = Object.create(NumArray).createNew(nums)
+ * obj.update(i,val)
+ * var param_2 = obj.sumRange(i,j)
+ */
