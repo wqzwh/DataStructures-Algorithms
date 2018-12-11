@@ -9,6 +9,7 @@ const _tree = Symbol('_tree')
 const _leftChildIndex = Symbol('_leftChildIndex')
 const _rightChildIndex = Symbol('_rightChildIndex')
 const _buildSegmentTree = Symbol('_buildSegmentTree')
+const _query = Symbol('_query')
 class SegmentTree {
   constructor(arr = [], merge) {
     this.merge = merge
@@ -61,6 +62,51 @@ class SegmentTree {
     this[_buildSegmentTree](leftTreeIndex, l, mid)
     this[_buildSegmentTree](rightTreeIndex, mid + 1, r)
 
-    this[_tree][treeIndex] = this.merge.merge(this[_tree][leftTreeIndex], this[_tree][rightTreeIndex])
+    this[_tree][treeIndex] = this.merge(this[_tree][leftTreeIndex], this[_tree][rightTreeIndex])
+  }
+
+  /**
+   *
+   * 根据区间在线段树中查找
+   * [ql, qr]
+   *
+   */
+  query(ql, qr) {
+    if(ql < 0 || ql > this[_data].length || qr < 0 || qr > this[_data].length || ql > qr) return '区间不合法'
+    return this[_query](0, 0, this[_data].length - 1, ql, qr)
+  }
+
+  /**
+   *
+   * treeIndex 节点的索引
+   * l 以treeIndex为节点的线段树的左区间
+   * r 以treeIndex为节点的线段树的右区间
+   * ql 待查询区间的左区间
+   * qr 待查询区间的右区间
+   *
+   */
+  [_query](treeIndex, l, r, ql, qr) {
+    if(l === ql && r === qr) {
+      return this[_tree][treeIndex]
+    }
+
+    const mid = l + (r - l) / 2
+    const leftTreeIndex = this[_leftChildIndex](treeIndex)
+    const rightTreeIndex = this[_rightChildIndex](treeIndex)
+
+    // 如果待查询的区间的右区间比mid + 1还要小，说明该待查询区间只要在左子树上进行递归执行即可
+    if(qr <= mid + 1) {
+      return this[_query](leftTreeIndex, l, mid + 1, ql, qr)
+    }
+
+    if(ql >= mid + 1) {
+      return this[_query](rightTreeIndex, mid + 1, r, ql, qr)
+    }
+
+    // 如果区间正在即在左边右在右边
+    let leftRsult = this[_query](leftTreeIndex, l, mid, ql, mid)
+    let rightRsult = this[_query](rightTreeIndex, mid + 1, r, mid + 1, qr)
+
+    return this.merge(leftRsult, rightRsult)
   }
 }
