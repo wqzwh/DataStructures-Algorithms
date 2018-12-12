@@ -7,8 +7,9 @@
 const TreeMap = require('../Map/BSTMap')
 
 class Node {
-  constructor(isWord = false) {
+  constructor(isWord = false, value = null) {
     this.isWord = isWord
+    this.value = value
     this.next = new TreeMap()
   }
 }
@@ -24,7 +25,7 @@ class Trie {
   }
 
   // 添加一个新的单词
-  add(word) {
+  add(word, value) {
     let cur = this.root
     for(let i = 0; i < word.length; i++) {
       let c = word.charAt(i)
@@ -35,6 +36,7 @@ class Trie {
       cur.isWord = true
       this.size++
     }
+    cur.value = value
   }
 
   // 在字典树中查询单词是否包含
