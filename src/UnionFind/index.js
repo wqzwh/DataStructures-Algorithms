@@ -7,7 +7,7 @@ const _find = Symbol('_find')
 class UnionFind {
   constructor(size) {
     this.id = new Array(size)
-    for(let i = 0; i < id.length; i++) {
+    for(let i = 0; i < this.id.length; i++) {
       this.id[i] = i
     }
   }
