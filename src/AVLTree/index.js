@@ -26,6 +26,8 @@ const _getHeight = Symbol('_getHeight')
 const _inOrder = Symbol('_inOrder')
 const _getBalanceFactor = Symbol('_getBalanceFactor')
 const _isBalanced = Symbol('_isBalanced')
+const _rightRotate = Symbol('_rightRotate')
+const _leftRotate = Symbol('_leftRotate')
 class AVLTree {
   constructor() {
     this.root = null
@@ -95,7 +97,26 @@ class AVLTree {
     // 更新平衡因子
     const balanceFactor = this[_getBalanceFactor](node)
 
-    if(Math.abs(balanceFactor) > 1) return '不是平衡二叉树'
+    // if(Math.abs(balanceFactor) > 1) return '不是平衡二叉树'
+
+    // 平衡性维护
+    // LL
+    if(balanceFactor > 1 && this[_getBalanceFactor](node.left) >= 0) return this[_rightRotate](node)
+
+    // RR
+    if(balanceFactor < -1 && this[_getBalanceFactor](node.left) <= 0) return this[_leftRotate](node)
+
+    // LR
+    if(balanceFactor > 1 && this[_getBalanceFactor](node.left) < 0) {
+      node.left = this[_leftRotate](node.left)
+      return this[_rightRotate](node)
+    }
+
+    // RL
+    if(balanceFactor < -1 && this[_getBalanceFactor](node.left) > 0) {
+      node.right = this[_rightRotate](node.right)
+      return this[_leftRotate](node)
+    }
 
     return node
   }
@@ -118,6 +139,66 @@ class AVLTree {
   [_getBalanceFactor](node) {
     if(node === null) return 0
     return this[_getHeight](node.left) - this[_getHeight](node.right)
+  }
+
+  // 右旋转
+  // 插入的元素在左侧的左侧
+  /**
+   *           y                          x
+   *          / \                        /  \
+   *         x  T4                      z    y
+   *        / \         向右旋转（y）    / \   / \
+   *       z  T3     - - - - - - - -> T1 T2 T3 T4
+   *      / \
+   *     T1 T2
+   *
+   *   T3 = x.right
+   *   x.right = y
+   *   y.left = T3
+   */
+  [_rightRotate](node) {
+    const x = node.left
+    const T3 = x.right
+
+    // 向右旋转
+    x.right = node
+    node.left = T3
+
+    // 更新height
+    node.height = Math.max(this[_getHeight](node.left), this[_getHeight](node.right)) + 1
+    x.height = Math.max(this[_getHeight](x.left), this[_getHeight](x.right)) + 1
+
+    return x
+  }
+
+  // 左旋转
+  // 插入的元素在右侧的右侧
+  /**
+   *           y                          x
+   *          / \                        /  \
+   *         T4  x                      y    z
+   *            / \      向左旋转（y）    / \   / \
+   *           T3  z  - - - - - - - -> T4 T3 T1 T2
+   *              / \
+   *             T1 T2
+   *
+   *   T3 = x.left
+   *   x.left = y
+   *   y.right = T3
+   */
+  [_leftRotate](node) {
+    const x = node.right
+    const T3 = x.left
+
+    // 向右旋转
+    x.left = node
+    node.right = T3
+
+    // 更新height
+    node.height = Math.max(this[_getHeight](node.left), this[_getHeight](node.right)) + 1
+    x.height = Math.max(this[_getHeight](x.left), this[_getHeight](x.right)) + 1
+
+    return x
   }
 
   contains(key) {
@@ -149,12 +230,14 @@ class AVLTree {
       return null
     }
 
+    let retNode = ''
+
     if(key < node.key) {
       node.left = this[_remove](node.left, key)
-      return node
+      retNode = node
     } else if(key > node.key) {
       node.right = this[_remove](node.right, key)
-      return node
+      retNode = node
     } else {
       // key === node.key
 
@@ -163,37 +246,57 @@ class AVLTree {
         let nodeRight = node.right
         node.right = null
         this.size--
-        return nodeRight
+        retNode = nodeRight
       }
       // 右子树为空
-      if(node.right === null) {
+      else if(node.right === null) {
 
         let nodeLeft = node.left
         node.left = null
         this.size--
-        return nodeLeft
+        retNode = nodeLeft
       }
       // 左子树和右子树都不为空
       // 找到比待删除节点大的最小节点，即待删除元素节点右子树的最小节点
       // 用这个节点代替待删除节点
-      let successor = this[_findMin](node.right)
-      successor.right = this[_removeMin](node.right)
-      successor.left = node.left
+      else {
+        let successor = this[_findMin](node.right)
+        successor.right = this[_remove](node.right, successor.key)
+        successor.left = node.left
 
-      node.left = node.right = null
-      return successor
+        node.left = node.right = null
+        retNode = successor
+      }
     }
-  }
 
-  [_removeMin](node) {
-    if(node.left === null) {
-      let rightNode = node.right
-      node.right = null
-      this.size--
-      return rightNode
+    if(retNode === null) return null
+
+    // 更新height
+    retNode.height = 1 + Math.max(this[_getHeight](retNode.left), this[_getHeight](retNode.right))
+
+    // 更新平衡因子
+    const balanceFactor = this[_getBalanceFactor](retNode)
+
+    // 平衡性维护
+    // LL
+    if(balanceFactor > 1 && this[_getBalanceFactor](retNode.left) >= 0) return this[_rightRotate](retNode)
+
+    // RR
+    if(balanceFactor < -1 && this[_getBalanceFactor](retNode.left) <= 0) return this[_leftRotate](retNode)
+
+    // LR
+    if(balanceFactor > 1 && this[_getBalanceFactor](retNode.left) < 0) {
+      retNode.left = this[_leftRotate](retNode.left)
+      return this[_rightRotate](retNode)
     }
-    node.left = this[_removeMin](node.left)
-    return node
+
+    // RL
+    if(balanceFactor < -1 && this[_getBalanceFactor](retNode.left) > 0) {
+      retNode.right = this[_rightRotate](retNode.right)
+      return this[_leftRotate](retNode)
+    }
+
+    return retNode
   }
 
   [_findMin](node) {
