@@ -15,13 +15,17 @@ class Node {
   }
 }
 
+const BST = require('../BST/index')
+
 const _add = Symbol('_add')
 const _getNode = Symbol('_getNode')
 const _remove = Symbol('_remove')
 const _findMin = Symbol('_findMin')
 const _removeMin = Symbol('_removeMin')
 const _getHeight = Symbol('_getHeight')
+const _inOrder = Symbol('_inOrder')
 const _getBalanceFactor = Symbol('_getBalanceFactor')
+const _isBalanced = Symbol('_isBalanced')
 class AVLTree {
   constructor() {
     this.root = null
@@ -34,6 +38,37 @@ class AVLTree {
 
   isEmpty() {
     return this.size === 0
+  }
+
+  // 判断该二叉树是否是二分搜索树
+  isBST() {
+    const keys = new BST()
+    this[_inOrder](this.root, keys)
+
+    for(let i = 1; i < keys.getSize(); i++) {
+      if(keys.get(i - 1) > keys.get(i) > 0) return false
+    }
+    return true
+  }
+
+  // 中序排序方法
+  [_inOrder](node, keys) {
+    if(node === null) return
+    this[_inOrder](node.left, keys)
+    keys.add(node.key)
+    this[_inOrder](node.right, keys)
+  }
+
+  // 判断二叉树是否是平衡树
+  isBalanced() {
+    return this[_isBalanced](node)
+  }
+
+  [_isBalanced](node) {
+    if(node === null) return true
+    const balanceFactor = this[_getBalanceFactor](node)
+    if(Math.abs(balanceFactor) > 1) return false
+    return this[_isBalanced](node.left) && this[_isBalanced](node.right)
   }
 
   add(key, value) {
@@ -79,7 +114,7 @@ class AVLTree {
     if(key > node.key) return this[_getNode](node.right, key)
   }
 
-  // 计算每个节点的平衡因子
+  // 计算每个节点的平衡因子的差
   [_getBalanceFactor](node) {
     if(node === null) return 0
     return this[_getHeight](node.left) - this[_getHeight](node.right)
