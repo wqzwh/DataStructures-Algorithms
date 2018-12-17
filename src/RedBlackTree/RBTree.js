@@ -18,9 +18,6 @@ class Node {
 
 const _add = Symbol('_add')
 const _getNode = Symbol('_getNode')
-const _remove = Symbol('_remove')
-const _findMin = Symbol('_findMin')
-const _removeMin = Symbol('_removeMin')
 const _isRed = Symbol('_isRed')
 const _leftRotate = Symbol('_leftRotate')
 const _rightRotate = Symbol('_rightRotate')
@@ -167,71 +164,5 @@ class RBTree {
     let node = this[_getNode](this.root, key)
     if(node === null) return '不存在'
     node.value = value
-  }
-
-  // 删除操作
-  // 返回删除的元素
-  remove(key, value) {
-    let node = this[_getNode](this.root, key)
-    if(node === null) return null
-    this.root = this[_remove](this.root, key)
-    return node.value
-  }
-
-  [_remove](node, key) {
-    if(node === null) {
-      return null
-    }
-
-    if(key < node.key) {
-      node.left = this[_remove](node.left, key)
-      return node
-    } else if(key > node.key) {
-      node.right = this[_remove](node.right, key)
-      return node
-    } else {
-      // key === node.key
-
-      // 左子树为空
-      if(node.left === null) {
-        let nodeRight = node.right
-        node.right = null
-        this.size--
-        return nodeRight
-      }
-      // 右子树为空
-      if(node.right === null) {
-
-        let nodeLeft = node.left
-        node.left = null
-        this.size--
-        return nodeLeft
-      }
-      // 左子树和右子树都不为空
-      // 找到比待删除节点大的最小节点，即待删除元素节点右子树的最小节点
-      // 用这个节点代替待删除节点
-      let successor = this[_findMin](node.right)
-      successor.right = this[_removeMin](node.right)
-      successor.left = node.left
-
-      node.left = node.right = null
-      return successor
-    }
-  }
-
-  [_removeMin](node) {
-    if(node.left === null) {
-      let rightNode = node.right
-      node.right = null
-      this.size--
-      return rightNode
-    }
-    node.left = this[_removeMin](node.left)
-    return node
-  }
-
-  [_findMin](node) {
-    if(node.left === null) return node
-    return this[_findMin](node.left)
   }
 }
