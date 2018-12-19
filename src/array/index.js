@@ -1,4 +1,4 @@
-const resize = Symbol('resize')
+const _resize = Symbol('_resize')
 class CArray {
   // capacity 数组容量
   constructor(capacity = 10) {
@@ -19,7 +19,7 @@ class CArray {
   // 向数组中插入一个元素 时间复杂度为O(n/2) = O(n)
   add(index, element) {
     if(index < 0 || index > this.size) throw 'index 不合法'
-    if(this.size === this.data.length) this[resize](2 * this.data.length) // 约定扩容两倍
+    if(this.size === this.data.length) this[_resize](2 * this.data.length) // 约定扩容两倍
     for(let i = this.size - 1; i >= index; i--) {
       this.data[i + 1] = this.data[i]
     }
@@ -116,9 +116,9 @@ class CArray {
 
     // 约定当数组空间只有一半的时候缩容
     // 由于定义当size === 数组的一半进行所容会出现复杂度震荡的问题，所以加入延迟所容机制，也就是将size === 数组的4分之一的时候再开始所容，并且数组长度的一半不能等于0
-    // if(this.size === this.data.length / 2) this[resize](this.data.length / 2)
+    // if(this.size === this.data.length / 2) this[_resize](this.data.length / 2)
     // 优化后的代码如下
-    if(this.size === this.data.length / 4 && this.data.length / 2 !== 0) this[resize](this.data.length / 2)
+    if(this.size === this.data.length / 4 && this.data.length / 2 !== 0) this[_resize](this.data.length / 2)
     return ret
   }
 
@@ -139,7 +139,7 @@ class CArray {
   }
 
   // 定义扩容的方法 时间复杂度为O(n)
-  [resize](newCapacity) {
+  [_resize](newCapacity) {
     let newData = Array(newCapacity)
     for(let i = 0, l = this.size; i < l; i++) {
       newData[i] = this.data[i]
