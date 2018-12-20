@@ -6,9 +6,9 @@
  *
  */
 const resize = Symbol('resize')
-class ArrayQueue {
-  constructor(capacity) {
-    this.data = Array(capacity + 1)
+class LoopQueue {
+  constructor(capacity = 10) {
+    this.data = new Array(capacity + 1)
     this.front = 0 // 对首位置
     this.tail = 0 // 队尾位置
     this.size = 0 // 队列大小
@@ -35,7 +35,7 @@ class ArrayQueue {
     this.size--
 
     if(this.size === this.getCapacity() / 4 && this.getCapacity() / 2 !==0) {
-      this[resize](this.getCapacity / 2)
+      this[resize](this.getCapacity() / 2)
     }
     return ret
   }
@@ -62,7 +62,7 @@ class ArrayQueue {
 
   // 定义扩容的方法 时间复杂度为O(n)
   [resize](newCapacity) {
-    let newData = Array(newCapacity + 1)
+    let newData = new Array(newCapacity + 1)
     for(let i = 0, l = this.size; i < l; i++) {
       newData[i] = this.data[(i + this.front) % this.data.length]
     }
@@ -84,3 +84,5 @@ class ArrayQueue {
     return sf + str
   }
 }
+module.exports = LoopQueue
+

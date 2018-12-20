@@ -9,10 +9,8 @@
  *
  */
 const CArray = require('../array/index')
-const Queue = require('./queue')
-class ArrayQueue extends Queue {
+class ArrayQueue {
   constructor(capacity) {
-    super()
     this.array = new CArray(capacity)
   }
 
@@ -53,3 +51,5 @@ class ArrayQueue extends Queue {
     return str
   }
 }
+
+module.exports = ArrayQueue

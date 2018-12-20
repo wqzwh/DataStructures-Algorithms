@@ -1,1 +1,3 @@
-require('./test/arrayTest.js')
+// require('./test/arrayTest.js')
+
+require('./test/queueTest.js')
