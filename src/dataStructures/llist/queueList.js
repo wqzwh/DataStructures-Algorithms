@@ -14,20 +14,20 @@ class Node {
   }
 }
 
-const size = Symbol('size')
+const _size = Symbol('_size')
 class QueueList {
   constructor() {
     this.dummyHead = new Node(null)
     this.tail = null
-    this[size] = 0
+    this[_size] = 0
   }
 
   getSize() {
-    return this[size]
+    return this[_size]
   }
 
   isEmpty() {
-    return this[size] === 0
+    return this[_size] === 0
   }
 
   // 从队尾进入
@@ -45,7 +45,7 @@ class QueueList {
     node.next = prev.next
     prev.next = node
 
-    this[size]++
+    this[_size]++
   }
 
   // 从对首出
@@ -56,7 +56,7 @@ class QueueList {
     this.dummyHead.next = retNode.next
     retNode.next = null
     if(this.dummyHead.next === null) this.tail = null
-    this[size]--
+    this[_size]--
     return retNode
   }
 
@@ -65,3 +65,5 @@ class QueueList {
       return this.dummyHead.next.element
   }
 }
+
+module.exports = QueueList

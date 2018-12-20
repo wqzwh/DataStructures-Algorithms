@@ -17,23 +17,23 @@ class Node {
  *
 */
 
-const size = Symbol('size')
+const _size = Symbol('_size')
 class LList {
   constructor() {
     // this.head = null
     // 通过增加假头，这样可以不用区分因添加元素位置不同逻辑不同
     this.dummyHead = new Node(null)
-    this[size] = 0
+    this[_size] = 0
   }
 
   // 获取链表元素的个数
   getSize() {
-    return this[size]
+    return this[_size]
   }
 
   // 链表是否为空
   isEmpty() {
-    return this[size] === 0
+    return this[_size] === 0
   }
 
   /**
@@ -44,13 +44,13 @@ class LList {
    * 时间复杂度均为O(n)
    * */
   add(index, element) {
-    if(index < 0 || index > this[size]) throw '不合法'
+    if(index < 0 || index > this[_size]) throw '不合法'
     let prev = this.dummyHead
     for(let i = 0; i < index; i++) {
       prev = prev.next
     }
     prev.next = new Node(element, prev.next)
-    this[size]++
+    this[_size]++
   }
 
   /**
@@ -66,13 +66,13 @@ class LList {
   // 向链表末尾添加元素
   // 时间复杂度均为O(n)
   addLast(element) {
-    this.add(this[size], element)
+    this.add(this[_size], element)
   }
 
   // 通过索引来查找链表元素
   // 时间复杂度均为O(n)
   get(index) {
-    if(index < 0 || index > this[size]) throw '不合法'
+    if(index < 0 || index > this[_size]) throw '不合法'
     let cur = this.dummyHead.next
     for(let i = 0; i < index; i++){
       cur = cur.next
@@ -87,13 +87,13 @@ class LList {
 
   // 获取链表最后一个元素
   getLast() {
-    return this.get(this[size] - 1)
+    return this.get(this[_size] - 1)
   }
 
   // 修改链表index位置的元素
   // 时间复杂度均为O(n)
   set(index, element) {
-    if(index < 0 || index > this[size]) throw '不合法'
+    if(index < 0 || index > this[_size]) throw '不合法'
     let cur = this.dummyHead.next
     for(let i = 0; i < index; i++){
       cur = cur.next
@@ -115,7 +115,7 @@ class LList {
   // 删除链表节点
   // 时间复杂度均为O(n)
   remove(index) {
-    if(index < 0 || index > this[size]) throw '不合法'
+    if(index < 0 || index > this[_size]) throw '不合法'
     let prev = this.dummyHead
     for(let i = 0; i < index; i++){
       prev = prev.next
@@ -123,7 +123,7 @@ class LList {
     let retNode = prev.next
     prev.next = retNode.next
     retNode.next = null
-    this[size]--
+    this[_size]--
     return retNode
   }
 
@@ -134,7 +134,7 @@ class LList {
 
   // 时间复杂度均为O(n)
   removeLast() {
-    return this.remove(this[size] - 1)
+    return this.remove(this[_size] - 1)
   }
 
   // 根据元素删除
@@ -146,7 +146,7 @@ class LList {
         let retNode = cur.next
         cur.next = retNode.next
         retNode.next = null
-        this[size]--
+        this[_size]--
         return retNode
       }
       cur = cur.next
