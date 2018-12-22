@@ -1,6 +1,10 @@
 const path = require('path')
 const HtmlWebpackPlugin = require('html-webpack-plugin')
 
+function resolve(dir) {
+  return path.join(__dirname, '..', dir)
+}
+
 module.exports = {
   entry: './src/index.js',
   output: {
@@ -9,11 +13,23 @@ module.exports = {
   },
 
   module: {
-    rules: [{
-      test: /\.js?$/,
-      exclude: '/(node_modules)/',
-      loader: 'babel-loader'
-    }]
+    rules: [
+      {
+        test: /\.js?$/,
+        exclude: '/(node_modules)/',
+        loader: 'babel-loader'
+      },
+      {
+        test: /\.js?$/,
+        loader: 'eslint-loader',
+        enforce: 'pre',
+        include: [resolve('src')],
+        options: {
+          formatter: require('eslint-friendly-formatter'),
+          emitWarning: true
+        }
+      }
+    ]
   },
 
   plugins: [
