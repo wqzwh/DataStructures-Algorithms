@@ -47,17 +47,17 @@ const Helper = {
    */
   testSort(sortName, sort, arr, n) {
     const startTime = new Date()
-    sort(arr, n)
+    const sortArr = sort(arr, n)
     const endTime = new Date()
-    if(!this.isSorted(arr, n)) throw '数据未排序'
+    if(!this.isSorted(sortArr, n)) throw '数据未排序'
     const ret = `${sortName}: ${(endTime - startTime) / 1000}s`
     console.log(ret)
   },
 
   /**
-   * 
+   *
    * 是否有序
-   * 
+   *
    */
   isSorted(arr, n) {
     for (let i = 0; i < n - 1; i++) {

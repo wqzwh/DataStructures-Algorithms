@@ -26,3 +26,5 @@ require('./test/algorithm/insertSortTest')
 require('./test/algorithm/bubbleSortTest')
 // 希尔排序
 require('./test/algorithm/shellSortTest.js')
+// 归并排序
+require('./test/algorithm/mergeSortTest.js')
