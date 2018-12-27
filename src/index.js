@@ -28,3 +28,5 @@ require('./test/algorithm/bubbleSortTest')
 require('./test/algorithm/shellSortTest.js')
 // 归并排序
 require('./test/algorithm/mergeSortTest.js')
+// 快速排序2
+require('./test/algorithm/quickSortTest.js')
