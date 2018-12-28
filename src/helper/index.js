@@ -66,6 +66,18 @@ const Helper = {
       }
     }
     return true
+  },
+
+  /**
+   *
+   * swap交换位置方法
+   * b > a
+   *
+   */
+  swap(arr, a, b) {
+    const tem = arr[b]
+    arr[b] = arr[a]
+    arr[a] = tem
   }
 }
 
