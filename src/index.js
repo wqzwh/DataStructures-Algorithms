@@ -19,14 +19,14 @@
  * */
 
 // 选择排序测试
-require('./test/algorithm/selectSortTest')
+// require('./test/algorithm/selectSortTest')
 // 插入排序测试
-require('./test/algorithm/insertSortTest')
+// require('./test/algorithm/insertSortTest')
 // 冒泡排序
-require('./test/algorithm/bubbleSortTest')
+// require('./test/algorithm/bubbleSortTest')
 // 希尔排序
-require('./test/algorithm/shellSortTest.js')
+// require('./test/algorithm/shellSortTest.js')
 // 归并排序
-require('./test/algorithm/mergeSortTest.js')
+// require('./test/algorithm/mergeSortTest.js')
 // 快速排序2
 require('./test/algorithm/quickSortTest.js')
