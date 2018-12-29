@@ -11,7 +11,9 @@ const Helper = require('../../helper/index')
 // 2、start向右移动，当遇到arr[start] < arr[pivot]，则stroeIndex和start做交换，并且stroeIndex++
 // 3、当start === pivot，将storeIndex和pivot的值交换，然后返回storeIndex，剩余数组将以storeIndex为边界分别递归执行1，2，3
 const _partition = (arr, l, r) => {
-  const pivot = r
+  // 随机取一个数字作为基准值的序数
+  const nl = parseInt(Math.random() * (r - l + 1) + l, 10)
+  const pivot = nl
   let storeIndex = l
   let start = l
   for (start = l; start < r; start++) {
