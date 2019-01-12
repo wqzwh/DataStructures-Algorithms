@@ -34,7 +34,7 @@ class QueueList {
   // O(1)复杂度
   enqueue(element) {
     let prev = this.dummyHead
-    if(this.tail === null) {
+    if (this.tail === null) {
       this.tail = new Node(element)
     } else {
       this.tail.next = new Node(element)
@@ -51,18 +51,18 @@ class QueueList {
   // 从对首出
   // O(1)复杂度
   dequeue() {
-    if(this.isEmpty()) return '链表为空'
+    if (this.isEmpty()) return '链表为空'
     let retNode = this.dummyHead.next
     this.dummyHead.next = retNode.next
     retNode.next = null
-    if(this.dummyHead.next === null) this.tail = null
+    if (this.dummyHead.next === null) this.tail = null
     this[_size]--
     return retNode
   }
 
   getFront() {
-    if(this.isEmpty()) return '链表为空'
-      return this.dummyHead.next.element
+    if (this.isEmpty()) return '链表为空'
+    return this.dummyHead.next.element
   }
 }
 

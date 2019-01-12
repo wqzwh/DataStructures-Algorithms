@@ -13,7 +13,7 @@ class LListSet {
   // 添加元素
   // 不能添加重复元素
   add(element) {
-    if(!this.llist.contains(element)) this.llist.addFirst(element)
+    if (!this.llist.contains(element)) this.llist.addFirst(element)
   }
 
   // 删除元素

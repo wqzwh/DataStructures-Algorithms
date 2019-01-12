@@ -35,14 +35,14 @@ class BSTMap {
   }
 
   [_add](node, key, value) {
-    if(node === null) {
+    if (node === null) {
       this.size++
       return new BSTNode(key, value)
     }
 
-    if(key < node.key) {
+    if (key < node.key) {
       node.left = this[_add](node.left, key, value)
-    } else if(key > node.key) {
+    } else if (key > node.key) {
       node.right = this[_add](node.right, key, value)
     } else {
       node.value = value
@@ -52,10 +52,10 @@ class BSTMap {
 
   // 根据key获得节点
   [_getNode](node, key) {
-    if(node === null) return null
-    if(key === node.key) return node
-    if(key < node.key) return this[_getNode](node.left, key)
-    if(key > node.key) return this[_getNode](node.right, key)
+    if (node === null) return null
+    if (key === node.key) return node
+    if (key < node.key) return this[_getNode](node.left, key)
+    if (key > node.key) return this[_getNode](node.right, key)
   }
 
   get(key) {
@@ -73,7 +73,7 @@ class Node {
   }
 }
 
-var Trie = function() {
+var Trie = function () {
   this.size = 0
   this.root = new Node()
 };
@@ -83,14 +83,14 @@ var Trie = function() {
  * @param {string} word
  * @return {void}
  */
-Trie.prototype.insert = function(word) {
+Trie.prototype.insert = function (word) {
   let cur = this.root
-  for(let i = 0; i < word.length; i++) {
+  for (let i = 0; i < word.length; i++) {
     let c = word.charAt(i)
-    if(cur.next.get(c) === null) cur.next.add(c, new Node())
+    if (cur.next.get(c) === null) cur.next.add(c, new Node())
     cur = cur.next.get(c)
   }
-  if(!cur.isWord) {
+  if (!cur.isWord) {
     cur.isWord = true
     this.size++
   }
@@ -101,11 +101,11 @@ Trie.prototype.insert = function(word) {
  * @param {string} word
  * @return {boolean}
  */
-Trie.prototype.search = function(word) {
+Trie.prototype.search = function (word) {
   let cur = this.root
-  for(let i = 0; i < word.length; i++){
+  for (let i = 0; i < word.length; i++) {
     let c = word.charAt(i)
-    if(cur.next.get(c) === null) return false
+    if (cur.next.get(c) === null) return false
     cur = cur.next.get(c)
   }
   return cur.isWord
@@ -116,11 +116,11 @@ Trie.prototype.search = function(word) {
  * @param {string} prefix
  * @return {boolean}
  */
-Trie.prototype.startsWith = function(prefix) {
+Trie.prototype.startsWith = function (prefix) {
   let cur = this.root
-  for(let i = 0; i < prefix.length; i++){
+  for (let i = 0; i < prefix.length; i++) {
     let c = prefix.charAt(i)
-    if(cur.next.get(c) === null) return false
+    if (cur.next.get(c) === null) return false
     cur = cur.next.get(c)
   }
   return true

@@ -15,7 +15,7 @@ class Node {
  * node.next = head
  * head = node
  *
-*/
+ */
 
 const _size = Symbol('_size')
 class LList {
@@ -44,9 +44,9 @@ class LList {
    * 时间复杂度均为O(n)
    * */
   add(index, element) {
-    if(index < 0 || index > this[_size]) throw '不合法'
+    if (index < 0 || index > this[_size]) throw '不合法'
     let prev = this.dummyHead
-    for(let i = 0; i < index; i++) {
+    for (let i = 0; i < index; i++) {
       prev = prev.next
     }
     prev.next = new Node(element, prev.next)
@@ -58,7 +58,7 @@ class LList {
    * node.next = head
    * head = node
    * 时间复杂度均为O(1)
-  */
+   */
   addFirst(element) {
     this.add(0, element)
   }
@@ -72,9 +72,9 @@ class LList {
   // 通过索引来查找链表元素
   // 时间复杂度均为O(n)
   get(index) {
-    if(index < 0 || index > this[_size]) throw '不合法'
+    if (index < 0 || index > this[_size]) throw '不合法'
     let cur = this.dummyHead.next
-    for(let i = 0; i < index; i++){
+    for (let i = 0; i < index; i++) {
       cur = cur.next
     }
     return cur.element
@@ -93,9 +93,9 @@ class LList {
   // 修改链表index位置的元素
   // 时间复杂度均为O(n)
   set(index, element) {
-    if(index < 0 || index > this[_size]) throw '不合法'
+    if (index < 0 || index > this[_size]) throw '不合法'
     let cur = this.dummyHead.next
-    for(let i = 0; i < index; i++){
+    for (let i = 0; i < index; i++) {
       cur = cur.next
     }
     cur.element = element
@@ -105,8 +105,8 @@ class LList {
   // 时间复杂度均为O(n)
   contains(element) {
     let cur = this.dummyHead.next
-    while(cur.element !== null) {
-      if(cur.element === element) return true
+    while (cur.element !== null) {
+      if (cur.element === element) return true
       cur = cur.next
     }
     return false
@@ -115,9 +115,9 @@ class LList {
   // 删除链表节点
   // 时间复杂度均为O(n)
   remove(index) {
-    if(index < 0 || index > this[_size]) throw '不合法'
+    if (index < 0 || index > this[_size]) throw '不合法'
     let prev = this.dummyHead
-    for(let i = 0; i < index; i++){
+    for (let i = 0; i < index; i++) {
       prev = prev.next
     }
     let retNode = prev.next
@@ -139,10 +139,10 @@ class LList {
 
   // 根据元素删除
   removeElement(element) {
-    if(!this.contains(element)) return
+    if (!this.contains(element)) return
     let cur = this.dummyHead.next
-    while(cur !== null) {
-      if(cur.next.element === element) {
+    while (cur !== null) {
+      if (cur.next.element === element) {
         let retNode = cur.next
         cur.next = retNode.next
         retNode.next = null
@@ -157,7 +157,7 @@ class LList {
   toString() {
     let res = ''
     let cur = this.dummyHead.next
-    while(cur !== null) {
+    while (cur !== null) {
       res += cur + '->'
       cur = cur.next
     }

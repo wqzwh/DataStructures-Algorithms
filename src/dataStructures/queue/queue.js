@@ -8,8 +8,7 @@
  *
  */
 class Queue {
-  constructor() {
-  }
+  constructor() {}
 
   enqueue() {
 

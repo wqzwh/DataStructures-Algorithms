@@ -37,14 +37,14 @@ class BST {
   // 添加元素的递归函数
   // 返回插入新节点后二分搜索书的根
   [_add](node, element) {
-    if(node === null) {
+    if (node === null) {
       this.size++
       return new Node(element)
     }
 
-    if(element < node.element) {
+    if (element < node.element) {
       node.left = this[_add](node.left, element)
-    } else if(element > node.element) {
+    } else if (element > node.element) {
       node.right = this[_add](node.right, element)
     }
     return node
@@ -70,12 +70,12 @@ class BSTSet {
 }
 
 const uniqueMorseRepresentations = (words) => {
-  const codes = [".-","-...","-.-.","-..",".","..-.","--.","....","..",".---","-.-",".-..","--","-.","---",".--.","--.-",".-.","...","-","..-","...-",".--","-..-","-.--","--.."]
+  const codes = [".-", "-...", "-.-.", "-..", ".", "..-.", "--.", "....", "..", ".---", "-.-", ".-..", "--", "-.", "---", ".--.", "--.-", ".-.", "...", "-", "..-", "...-", ".--", "-..-", "-.--", "--.."]
   let treeSet = new BSTSet()
 
-  for(let v of words) {
+  for (let v of words) {
     let str = ''
-    for(let i = 0; i < v.length; i++) {
+    for (let i = 0; i < v.length; i++) {
       str += codes[v.charCodeAt(i) - 'a'.charCodeAt()]
     }
     treeSet.add(str)

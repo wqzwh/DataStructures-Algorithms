@@ -18,9 +18,9 @@ class CArray {
 
   // 向数组中插入一个元素 时间复杂度为O(n/2) = O(n)
   add(index, element) {
-    if(index < 0 || index > this.size) throw 'index 不合法'
-    if(this.size === this.data.length) this[_resize](2 * this.data.length) // 约定扩容两倍
-    for(let i = this.size - 1; i >= index; i--) {
+    if (index < 0 || index > this.size) throw 'index 不合法'
+    if (this.size === this.data.length) this[_resize](2 * this.data.length) // 约定扩容两倍
+    for (let i = this.size - 1; i >= index; i--) {
       this.data[i + 1] = this.data[i]
     }
     this.data[index] = element
@@ -56,8 +56,8 @@ class CArray {
   // 输出字符串
   toString() {
     let str = ''
-    for(let i = 0, l = this.size; i < l; i++) {
-      if(i === l - 1) {
+    for (let i = 0, l = this.size; i < l; i++) {
+      if (i === l - 1) {
         str += this.data[i]
       } else {
         str += this.data[i] + ','
@@ -68,7 +68,7 @@ class CArray {
 
   // 取出索引index位置的元素 时间复杂度为O(1)
   get(index) {
-    if(index < 0 || index > this.size) throw 'index 不合法'
+    if (index < 0 || index > this.size) throw 'index 不合法'
     return this.data[index]
   }
 
@@ -84,31 +84,31 @@ class CArray {
 
   // 数组元素的更新 时间复杂度为O(1)
   set(index, element) {
-    if(index < 0 || index > this.size) throw 'index 不合法'
+    if (index < 0 || index > this.size) throw 'index 不合法'
     this.data[index] = element
   }
 
   // 是否包含元素 时间复杂度为O(n)
   contains(element) {
-    for(let i = 0; i < this.size; i++) {
-      if(this.data[i] === element) return true
+    for (let i = 0; i < this.size; i++) {
+      if (this.data[i] === element) return true
     }
     return false
   }
 
   // 通过元素找索引，找不到则返回 -1 时间复杂度为O(n)
   find(element) {
-    for(let i = 0; i < this.size; i++) {
-      if(this.data[i] === element) return i
+    for (let i = 0; i < this.size; i++) {
+      if (this.data[i] === element) return i
     }
     return -1
   }
 
   // 删除元素 返回删除数组的元素 时间复杂度为O(n)
   remove(index) {
-    if(index < 0 || index > this.size) throw 'index 不合法'
+    if (index < 0 || index > this.size) throw 'index 不合法'
     let ret = this.data[index]
-    for(let i = index + 1; i < this.size; i++) {
+    for (let i = index + 1; i < this.size; i++) {
       this.data[i - 1] = this.data[i]
     }
     this.size--
@@ -118,7 +118,7 @@ class CArray {
     // 由于定义当size === 数组的一半进行所容会出现复杂度震荡的问题，所以加入延迟所容机制，也就是将size === 数组的4分之一的时候再开始所容，并且数组长度的一半不能等于0
     // if(this.size === this.data.length / 2) this[_resize](this.data.length / 2)
     // 优化后的代码如下
-    if(this.size === this.data.length / 4 && this.data.length / 2 !== 0) this[_resize](this.data.length / 2)
+    if (this.size === this.data.length / 4 && this.data.length / 2 !== 0) this[_resize](this.data.length / 2)
     return ret
   }
 
@@ -135,13 +135,13 @@ class CArray {
   // 根据元素删除 时间复杂度为O(n)
   removeElement(element) {
     let index = this.find(element)
-    if(index !== -1) this.remove(index)
+    if (index !== -1) this.remove(index)
   }
 
   // 定义扩容的方法 时间复杂度为O(n)
   [_resize](newCapacity) {
     let newData = Array(newCapacity)
-    for(let i = 0, l = this.size; i < l; i++) {
+    for (let i = 0, l = this.size; i < l; i++) {
       newData[i] = this.data[i]
     }
     this.data = newData
@@ -149,7 +149,7 @@ class CArray {
 
   // 交换i，j两个索引的位置
   swap(i, j) {
-    if(i < 0 || i >= this.size || j < 0 || j >= this.size) return '序号不存在'
+    if (i < 0 || i >= this.size || j < 0 || j >= this.size) return '序号不存在'
     let t = this.data[i]
     this.data[i] = this.data[j]
     this.data[j] = t

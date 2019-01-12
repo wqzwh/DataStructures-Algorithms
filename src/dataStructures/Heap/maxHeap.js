@@ -4,7 +4,6 @@
  * 每个节点的值要大于当它的孩子节点的值
  */
 
-
 const CArray = require('../array/index')
 
 const _parentIndex = Symbol('_parentIndex')
@@ -27,7 +26,7 @@ class MaxHeap {
 
   // 根据index来查找父亲节点的索引
   [_parentIndex](index) {
-    if(index === 0) return '无父亲节点'
+    if (index === 0) return '无父亲节点'
     return Math.floor((index - 1) / 2)
   }
 
@@ -48,7 +47,10 @@ class MaxHeap {
   }
 
   [_siftUp](index) {
-    while(index > 0 && this.data.get(this[_parentIndex](index)) < this.data.get(index)) {
+    while (
+      index > 0 &&
+      this.data.get(this[_parentIndex](index)) < this.data.get(index)
+    ) {
       this.data.swap(index, this[_parentIndex])
       index = this[_parentIndex](index)
     }
@@ -56,13 +58,13 @@ class MaxHeap {
 
   // 找到堆中最大的元素
   findMax() {
-    if(this.data.getSize()) return '堆为空'
+    if (this.data.getSize()) return '堆为空'
     return this.data.get(0)
   }
 
   // 取出堆中最大元素
   extractMax() {
-    let ret = this.findMax()
+    const ret = this.findMax()
     this.data.swap(0, this.data.getSize() - 1)
     this.data.removeLast()
     this[_siftDowm](0)
@@ -70,12 +72,15 @@ class MaxHeap {
   }
 
   [_siftDowm](index) {
-    while(this[_leftChildIndex](index) < this.data.getSize()) {
+    while (this[_leftChildIndex](index) < this.data.getSize()) {
       let j = this[_leftChildIndex](index)
-      if(j + 1 < this.data,getSize() && this.data.get(j + 1) > this.data.get(j)) {
+      if (
+        (j + 1 < this.data,
+          getSize() && this.data.get(j + 1) > this.data.get(j))
+      ) {
         j = this[_rightChildIndex](j)
       }
-      if(this.data.get(index) > this.data.get(j)) {
+      if (this.data.get(index) > this.data.get(j)) {
         break
       }
       this.data.swap(k, j)
@@ -85,7 +90,7 @@ class MaxHeap {
 
   // 取出堆中最的元素，并且替换成元素element
   replace(element) {
-    let ret = this.findMax()
+    const ret = this.findMax()
     this.data.set(0, ret)
     this[_siftDowm](0)
     return ret
@@ -94,10 +99,8 @@ class MaxHeap {
   // 将任意数组整理成堆的形状
   heapify(arr) {
     this.data = arr
-    for(let i = this[_parentIndex](arr.length - 1); i >= 0; i--){
+    for (let i = this[_parentIndex](arr.length - 1); i >= 0; i--) {
       this[_siftDowm](i)
     }
   }
 }
-
-

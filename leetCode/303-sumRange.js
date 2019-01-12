@@ -14,7 +14,7 @@ class SegmentTree {
   constructor(arr = [], merge) {
     this.merge = merge
     this[_data] = new Array(arr.length)
-    for(let i = 0, l = arr.length; i < l; i++) {
+    for (let i = 0, l = arr.length; i < l; i++) {
       this[_data][i] = arr[i]
     }
     this[_tree] = new Array(4 * arr.length)
@@ -23,7 +23,7 @@ class SegmentTree {
 
   // 根据索引获取节点
   get(index) {
-    if(index < 0 || index > this[_data].length) return '索引不合法'
+    if (index < 0 || index > this[_data].length) return '索引不合法'
     return this[_data][index]
   }
 
@@ -50,7 +50,7 @@ class SegmentTree {
    * [l...r]
    */
   [_buildSegmentTree](treeIndex, l, r) {
-    if(l === r) {
+    if (l === r) {
       this[_tree][treeIndex] = this[_data][l]
       return
     }
@@ -72,7 +72,7 @@ class SegmentTree {
    *
    */
   query(ql, qr) {
-    if(ql < 0 || ql > this[_data].length || qr < 0 || qr > this[_data].length || ql > qr) return '区间不合法'
+    if (ql < 0 || ql > this[_data].length || qr < 0 || qr > this[_data].length || ql > qr) return '区间不合法'
     return this[_query](0, 0, this[_data].length - 1, ql, qr)
   }
 
@@ -86,7 +86,7 @@ class SegmentTree {
    *
    */
   [_query](treeIndex, l, r, ql, qr) {
-    if(l === ql && r === qr) {
+    if (l === ql && r === qr) {
       return this[_tree][treeIndex]
     }
 
@@ -95,11 +95,11 @@ class SegmentTree {
     const rightTreeIndex = this[_rightChildIndex](treeIndex)
 
     // 如果待查询的区间的右区间比mid还要小，说明该待查询区间只要在左子树上进行递归执行即可
-    if(qr <= mid) {
+    if (qr <= mid) {
       return this[_query](leftTreeIndex, l, mid, ql, qr)
     }
 
-    if(ql >= mid + 1) {
+    if (ql >= mid + 1) {
       return this[_query](rightTreeIndex, mid + 1, r, ql, qr)
     }
 
@@ -114,10 +114,10 @@ class SegmentTree {
 /**
  * @param {number[]} nums
  */
-const NumArray = function(nums) {
+const NumArray = function (nums) {
   let data = []
-  if(nums.length > 0) {
-    for(let i = 0; i < nums.length; i++) {
+  if (nums.length > 0) {
+    for (let i = 0; i < nums.length; i++) {
       data[i] = nums[i]
     }
     this.segTree = new SegmentTree(data, (a, b) => a + b)
@@ -129,8 +129,8 @@ const NumArray = function(nums) {
  * @param {number} j
  * @return {number}
  */
-NumArray.prototype.sumRange = function(i, j) {
-  if(this.segTree === null) return '线段树是空'
+NumArray.prototype.sumRange = function (i, j) {
+  if (this.segTree === null) return '线段树是空'
   return this.segTree.query(i, j)
 };
 

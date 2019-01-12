@@ -26,14 +26,14 @@ class BSTMap {
   }
 
   [_add](node, key, value) {
-    if(node === null) {
+    if (node === null) {
       this.size++
       return new BSTNode(key, value)
     }
 
-    if(key < node.key) {
+    if (key < node.key) {
       node.left = this[_add](node.left, key, value)
-    } else if(key > node.key) {
+    } else if (key > node.key) {
       node.right = this[_add](node.right, key, value)
     } else {
       node.value = value
@@ -43,10 +43,10 @@ class BSTMap {
 
   // 根据key获得节点
   [_getNode](node, key) {
-    if(node === null) return null
-    if(key === node.key) return node
-    if(key < node.key) return this[_getNode](node.left, key)
-    if(key > node.key) return this[_getNode](node.right, key)
+    if (node === null) return null
+    if (key === node.key) return node
+    if (key < node.key) return this[_getNode](node.left, key)
+    if (key > node.key) return this[_getNode](node.right, key)
   }
 
   get(key) {
@@ -67,7 +67,7 @@ class Node {
 /**
  * Initialize your data structure here.
  */
-var WordDictionary = function() {
+var WordDictionary = function () {
   this.size = 0
   this.root = new Node()
 };
@@ -77,14 +77,14 @@ var WordDictionary = function() {
  * @param {string} word
  * @return {void}
  */
-WordDictionary.prototype.addWord = function(word) {
+WordDictionary.prototype.addWord = function (word) {
   let cur = this.root
-  for(let i = 0; i < word.length; i++) {
+  for (let i = 0; i < word.length; i++) {
     let c = word.charAt(i)
-    if(cur.next.get(c) === null) cur.next.add(c, new Node())
+    if (cur.next.get(c) === null) cur.next.add(c, new Node())
     cur = cur.next.get(c)
   }
-  if(!cur.isWord) {
+  if (!cur.isWord) {
     cur.isWord = true
     this.size++
   }
@@ -95,23 +95,23 @@ WordDictionary.prototype.addWord = function(word) {
  * @param {string} word
  * @return {boolean}
  */
-WordDictionary.prototype.search = function(word) {
+WordDictionary.prototype.search = function (word) {
   return this._match(this.root, word, 0)
 };
 
-WordDictionary.prototype._match = function(node, word, index) {
-  if(index === word.length) return node.isWord
+WordDictionary.prototype._match = function (node, word, index) {
+  if (index === word.length) return node.isWord
 
   let c = word.charAt(index)
-  if(c !== '.') {
-    if(node.next.get(c) === null) {
+  if (c !== '.') {
+    if (node.next.get(c) === null) {
       return false
     } else {
       return this._match(node.next.get(c), word, index + 1)
     }
   } else {
     let keyValue = node.next.root['key']
-    if(this._match(node.next.get(keyValue), word, index + 1)) {
+    if (this._match(node.next.get(keyValue), word, index + 1)) {
       return true
     }
     return false

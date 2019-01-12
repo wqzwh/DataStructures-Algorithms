@@ -1,4 +1,3 @@
-
 /**
  *
  * 树结构
@@ -66,14 +65,14 @@ class BST {
     //   return
     // }
 
-    if(node === null) {
+    if (node === null) {
       this.size++
       return new Node(element)
     }
 
-    if(element < node.element) {
+    if (element < node.element) {
       node.left = this[_add](node.left, element)
-    } else if(element > node.element) {
+    } else if (element > node.element) {
       node.right = this[_add](node.right, element)
     }
     return node
@@ -85,11 +84,11 @@ class BST {
   }
 
   [_contains](node, element) {
-    if(node === null) return false
+    if (node === null) return false
 
-    if(element === node.element) {
+    if (element === node.element) {
       return true
-    } else if(element < node.element) {
+    } else if (element < node.element) {
       return this[_contains](node.left, element)
     } else {
       return this[_contains](node.right, element)
@@ -102,7 +101,7 @@ class BST {
   }
 
   [_preOrder](node) {
-    if(node === null) return
+    if (node === null) return
     console.log('访问了当前节点', node)
     this[_preOrder](node.left)
     this[_preOrder](node.right)
@@ -112,11 +111,11 @@ class BST {
   preOrderNr() {
     let stack = new Stack()
     stack.push(this.root)
-    while(!stack.isEmpty()) {
+    while (!stack.isEmpty()) {
       let cur = stack.pop()
       console.log('访问了节点', cur.element)
-      if(cur.right !== null) stack.push(cur.right)
-      if(cur.left !== null) stack.push(cur.left)
+      if (cur.right !== null) stack.push(cur.right)
+      if (cur.left !== null) stack.push(cur.left)
     }
   }
 
@@ -126,7 +125,7 @@ class BST {
   }
 
   [_inOrder](node) {
-    if(node === null) return
+    if (node === null) return
     this[_inOrder](node.left)
     console.log('访问了当前节点', node)
     this[_inOrder](node.right)
@@ -138,7 +137,7 @@ class BST {
   }
 
   [_postOrder](node) {
-    if(node === null) return
+    if (node === null) return
     this[_postOrder](node.left)
     this[_postOrder](node.right)
     console.log('访问了当前节点', node)
@@ -148,33 +147,33 @@ class BST {
   levelOrder() {
     let q = new QueueList()
     q.enqueue(this.root)
-    while(!q.isEmpty()) {
+    while (!q.isEmpty()) {
       let cur = q.dequeue()
       console.log('访问了当前节点', node)
-      if(cur.left !== null) q.enqueue(cur.left)
-      if(cur.right !== null) q.enqueue(cur.right)
+      if (cur.left !== null) q.enqueue(cur.left)
+      if (cur.right !== null) q.enqueue(cur.right)
     }
   }
 
   // 查找最小元素
   findMin() {
-    if(this.size === 0 ) return '该树为空'
+    if (this.size === 0) return '该树为空'
     this[_findMin](this.root).element
   }
 
   [_findMin](node) {
-    if(node.left === null) return node
+    if (node.left === null) return node
     return this[_findMin](node.left)
   }
 
   // 查找最大元素
   findMax() {
-    if(this.size === 0 ) return '该树为空'
+    if (this.size === 0) return '该树为空'
     this[_findMax](this.root).element
   }
 
   [_findMax](node) {
-    if(node.right === null) return node
+    if (node.right === null) return node
     return this[_findMax](node.right)
   }
 
@@ -186,7 +185,7 @@ class BST {
   }
 
   [_removeMin](node) {
-    if(node.left === null) {
+    if (node.left === null) {
       let rightNode = node.right
       node.right = null
       this.size--
@@ -204,7 +203,7 @@ class BST {
   }
 
   [_removeMax](node) {
-    if(node.right === null) {
+    if (node.right === null) {
       let leftNode = node.left
       node.left = null
       this.size--
@@ -222,28 +221,28 @@ class BST {
   // 删除以node为根节点，元素为element的元素
   // 返回的是删除后返回的根
   [_remove](node, element) {
-    if(node === null) {
+    if (node === null) {
       return null
     }
 
-    if(element < node.element) {
+    if (element < node.element) {
       node.left = this[_remove](node.left, element)
       return node
-    } else if(element > node.element) {
+    } else if (element > node.element) {
       node.right = this[_remove](node.right, element)
       return node
     } else {
       // element === node.element
 
       // 左子树为空
-      if(node.left === null) {
+      if (node.left === null) {
         let nodeRight = node.right
         node.right = null
         this.size--
         return nodeRight
       }
       // 右子树为空
-      if(node.right === null) {
+      if (node.right === null) {
 
         let nodeLeft = node.left
         node.left = null

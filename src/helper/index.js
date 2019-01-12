@@ -49,7 +49,7 @@ const Helper = {
     const startTime = new Date()
     const newArr = sort(arr, n)
     const endTime = new Date()
-    if(!this.isSorted(newArr, n)) throw '数据未排序'
+    if (!this.isSorted(newArr, n)) throw '数据未排序'
     const ret = `${sortName}: ${(endTime - startTime) / 1000}s`
     console.log(ret)
   },
@@ -61,7 +61,7 @@ const Helper = {
    */
   isSorted(arr, n) {
     for (let i = 0; i < n - 1; i++) {
-      if(arr[i] > arr[i + 1]) {
+      if (arr[i] > arr[i + 1]) {
         return false
       }
     }

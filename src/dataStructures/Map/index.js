@@ -33,8 +33,8 @@ class LlistMap {
   // 根据key获得节点
   [getNode](key) {
     let cur = this.dummyHead.next
-    while(cur !== null) {
-      if(cur.key === key) return cur
+    while (cur !== null) {
+      if (cur.key === key) return cur
       cur = cur.next
     }
     return null
@@ -54,7 +54,7 @@ class LlistMap {
   // 添加元素
   add(key, value) {
     let node = this[getNode](key)
-    if(node === null) {
+    if (node === null) {
       this.dummyHead.next = new Node(key, value, dummyHead.next)
       this[size]++
     } else {
@@ -65,15 +65,15 @@ class LlistMap {
   // 设置元素
   set(key, value) {
     let node = this[getNode](key)
-    if(node === null) return '没有该元素'
+    if (node === null) return '没有该元素'
     node.value = value
   }
 
   // 删除操作
   remove(key) {
     let cur = this.dummyHead.next
-    while(cur.next !== null) {
-      if(cur.next.key === key) {
+    while (cur.next !== null) {
+      if (cur.next.key === key) {
         let retNode = cur.next
         cur.next = retNode.next
         retNode.next = null

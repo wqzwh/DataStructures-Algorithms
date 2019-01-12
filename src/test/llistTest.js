@@ -5,11 +5,11 @@ const LoopQueue = require('../dataStructures/queue/loopQueue.js')
 const test = (q, opCount) => {
   const startTime = new Date()
 
-  for(let i = 0; i < opCount; i++) {
-    q.enqueue(parseInt(Math.random()*(opCount+1),10))
+  for (let i = 0; i < opCount; i++) {
+    q.enqueue(parseInt(Math.random() * (opCount + 1), 10))
   }
 
-  for(let i = 0; i < opCount; i++) {
+  for (let i = 0; i < opCount; i++) {
     q.dequeue()
   }
 

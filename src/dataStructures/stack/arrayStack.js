@@ -49,8 +49,8 @@ class ArrayStack extends Stack {
 
   toString() {
     let str = ''
-    for(let i = 0, l = this.array.getSize(); i < l; i++) {
-      if(i === l - 1) {
+    for (let i = 0, l = this.array.getSize(); i < l; i++) {
+      if (i === l - 1) {
         str += this.array.get(i) + ' top'
       } else {
         str += this.array.get(i) + ','

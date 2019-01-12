@@ -26,14 +26,14 @@ class BSTMap {
   }
 
   [_add](node, key, value) {
-    if(node === null) {
+    if (node === null) {
       this.size++
       return new BSTNode(key, value)
     }
 
-    if(key < node.key) {
+    if (key < node.key) {
       node.left = this[_add](node.left, key, value)
-    } else if(key > node.key) {
+    } else if (key > node.key) {
       node.right = this[_add](node.right, key, value)
     } else {
       node.value = value
@@ -43,10 +43,10 @@ class BSTMap {
 
   // 根据key获得节点
   [_getNode](node, key) {
-    if(node === null) return null
-    if(key === node.key) return node
-    if(key < node.key) return this[_getNode](node.left, key)
-    if(key > node.key) return this[_getNode](node.right, key)
+    if (node === null) return null
+    if (key === node.key) return node
+    if (key < node.key) return this[_getNode](node.left, key)
+    if (key > node.key) return this[_getNode](node.right, key)
   }
 
   get(key) {
@@ -66,7 +66,7 @@ class Node {
 /**
  * Initialize your data structure here.
  */
-var MapSum = function() {
+var MapSum = function () {
   this.root = new Node()
 };
 
@@ -75,14 +75,14 @@ var MapSum = function() {
  * @param {number} val
  * @return {void}
  */
-MapSum.prototype.insert = function(key, val) {
+MapSum.prototype.insert = function (key, val) {
   let cur = this.root
-  for(let i = 0; i < key.length; i++) {
+  for (let i = 0; i < key.length; i++) {
     let c = key.charAt(i)
-    if(cur.next.get(c) === null) cur.next.add(c, new Node())
+    if (cur.next.get(c) === null) cur.next.add(c, new Node())
     cur = cur.next.get(c)
   }
-  if(!cur.isWord) {
+  if (!cur.isWord) {
     cur.isWord = true
     this.size++
   }
@@ -93,17 +93,17 @@ MapSum.prototype.insert = function(key, val) {
  * @param {string} prefix
  * @return {number}
  */
-MapSum.prototype.sum = function(prefix) {
+MapSum.prototype.sum = function (prefix) {
   let cur = this.root
-  for(let i = 0; i < prefix.length; i++){
+  for (let i = 0; i < prefix.length; i++) {
     let c = prefix.charAt(i)
-    if(cur.next.get(c) === null) return 0
+    if (cur.next.get(c) === null) return 0
     cur = cur.next.get(c)
   }
   return this._sum(cur)
 }
 
-MapSum.prototype._sum = function(node) {
+MapSum.prototype._sum = function (node) {
   let res = node.value
   let c = node.next.root['key']
   res += this._sum(node.next.get(c))

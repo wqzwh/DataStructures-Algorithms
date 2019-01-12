@@ -32,14 +32,14 @@ class BST {
   // 添加元素的递归函数
   // 返回插入新节点后二分搜索书的根
   [_add](node, element) {
-    if(node === null) {
+    if (node === null) {
       this.size++
       return new Node(element)
     }
 
-    if(element < node.element) {
+    if (element < node.element) {
       node.left = this[_add](node.left, element)
-    } else if(element > node.element) {
+    } else if (element > node.element) {
       node.right = this[_add](node.right, element)
     }
     return node
@@ -51,11 +51,11 @@ class BST {
   }
 
   [_contains](node, element) {
-    if(node === null) return false
+    if (node === null) return false
 
-    if(element === node.element) {
+    if (element === node.element) {
       return true
-    } else if(element < node.element) {
+    } else if (element < node.element) {
       return this[_contains](node.left, element)
     } else {
       return this[_contains](node.right, element)
@@ -70,28 +70,28 @@ class BST {
   // 删除以node为根节点，元素为element的元素
   // 返回的是删除后返回的根
   [_remove](node, element) {
-    if(node === null) {
+    if (node === null) {
       return null
     }
 
-    if(element < node.element) {
+    if (element < node.element) {
       node.left = this[_remove](node.left, element)
       return node
-    } else if(element > node.element) {
+    } else if (element > node.element) {
       node.right = this[_remove](node.right, element)
       return node
     } else {
       // element === node.element
 
       // 左子树为空
-      if(node.left === null) {
+      if (node.left === null) {
         let nodeRight = node.right
         node.right = null
         this.size--
         return nodeRight
       }
       // 右子树为空
-      if(node.right === null) {
+      if (node.right === null) {
 
         let nodeLeft = node.left
         node.left = null
@@ -111,7 +111,7 @@ class BST {
   }
 
   [_removeMin](node) {
-    if(node.left === null) {
+    if (node.left === null) {
       let rightNode = node.right
       node.right = null
       this.size--
@@ -122,7 +122,7 @@ class BST {
   }
 
   [_findMin](node) {
-    if(node.left === null) return node
+    if (node.left === null) return node
     return this[_findMin](node.left)
   }
 }
@@ -154,12 +154,12 @@ class BSTSet {
 
 const intersection = (nums1, nums2) => {
   let bstSet = new BSTSet()
-  for(let v of nums1) {
+  for (let v of nums1) {
     bstSet.add(v)
   }
   let ret = []
-  for(let v of nums2) {
-    if(bstSet.contains(v)) {
+  for (let v of nums2) {
+    if (bstSet.contains(v)) {
       ret.push(v)
       bstSet.remove(v)
     }

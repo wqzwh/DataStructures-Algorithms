@@ -9,7 +9,9 @@
  */
 
 const _quickSort = (arr) => {
-  if (arr.length <= 1) { return arr }
+  if (arr.length <= 1) {
+    return arr
+  }
   const pivot = arr[0]
 
   const left = []

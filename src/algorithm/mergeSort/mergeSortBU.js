@@ -33,7 +33,7 @@ const merge = (arr, l, mid, r) => {
 
 const mergeSortBU = (arr, n) => {
   for (let i = 1; i <= n; i += i) {
-    for (let j = 0; j + i < n; j += i + i ) {
+    for (let j = 0; j + i < n; j += i + i) {
       merge(arr, j, j + i - 1, Math.min(j + i + i - 1, n - 1))
     }
   }

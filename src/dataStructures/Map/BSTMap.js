@@ -37,14 +37,14 @@ class BSTMap {
   }
 
   [_add](node, key, value) {
-    if(node === null) {
+    if (node === null) {
       this.size++
       return new Node(key, value)
     }
 
-    if(key < node.key) {
+    if (key < node.key) {
       node.left = this[_add](node.left, key, value)
-    } else if(key > node.key) {
+    } else if (key > node.key) {
       node.right = this[_add](node.right, key, value)
     } else {
       node.value = value
@@ -54,10 +54,10 @@ class BSTMap {
 
   // 根据key获得节点
   [_getNode](node, key) {
-    if(node === null) return null
-    if(key === node.key) return node
-    if(key < node.key) return this[_getNode](node.left, key)
-    if(key > node.key) return this[_getNode](node.right, key)
+    if (node === null) return null
+    if (key === node.key) return node
+    if (key < node.key) return this[_getNode](node.left, key)
+    if (key > node.key) return this[_getNode](node.right, key)
   }
 
   contains(key) {
@@ -71,7 +71,7 @@ class BSTMap {
 
   set(key, value) {
     let node = this[_getNode](this.root, key)
-    if(node === null) return '不存在'
+    if (node === null) return '不存在'
     node.value = value
   }
 
@@ -79,34 +79,34 @@ class BSTMap {
   // 返回删除的元素
   remove(key, value) {
     let node = this[_getNode](this.root, key)
-    if(node === null) return null
+    if (node === null) return null
     this.root = this[_remove](this.root, key)
     return node.value
   }
 
   [_remove](node, key) {
-    if(node === null) {
+    if (node === null) {
       return null
     }
 
-    if(key < node.key) {
+    if (key < node.key) {
       node.left = this[_remove](node.left, key)
       return node
-    } else if(key > node.key) {
+    } else if (key > node.key) {
       node.right = this[_remove](node.right, key)
       return node
     } else {
       // key === node.key
 
       // 左子树为空
-      if(node.left === null) {
+      if (node.left === null) {
         let nodeRight = node.right
         node.right = null
         this.size--
         return nodeRight
       }
       // 右子树为空
-      if(node.right === null) {
+      if (node.right === null) {
 
         let nodeLeft = node.left
         node.left = null
@@ -126,7 +126,7 @@ class BSTMap {
   }
 
   [_removeMin](node) {
-    if(node.left === null) {
+    if (node.left === null) {
       let rightNode = node.right
       node.right = null
       this.size--
@@ -137,7 +137,7 @@ class BSTMap {
   }
 
   [_findMin](node) {
-    if(node.left === null) return node
+    if (node.left === null) return node
     return this[_findMin](node.left)
   }
 }

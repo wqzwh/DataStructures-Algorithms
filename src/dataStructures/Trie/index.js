@@ -27,12 +27,12 @@ class Trie {
   // 添加一个新的单词
   add(word, value) {
     let cur = this.root
-    for(let i = 0; i < word.length; i++) {
+    for (let i = 0; i < word.length; i++) {
       let c = word.charAt(i)
-      if(cur.next.get(c) === null) cur.next.add(c, new Node())
+      if (cur.next.get(c) === null) cur.next.add(c, new Node())
       cur = cur.next.get(c)
     }
-    if(!cur.isWord) {
+    if (!cur.isWord) {
       cur.isWord = true
       this.size++
     }
@@ -42,9 +42,9 @@ class Trie {
   // 在字典树中查询单词是否包含
   contains(word) {
     let cur = this.root
-    for(let i = 0; i < word.length; i++){
+    for (let i = 0; i < word.length; i++) {
       let c = word.charAt(i)
-      if(cur.next.get(c) === null) return false
+      if (cur.next.get(c) === null) return false
       cur = cur.next.get(c)
     }
     return cur.isWord
@@ -53,12 +53,11 @@ class Trie {
   // 在字典树中查询单词是否有以prefix为前缀的
   isPrefix(prefix) {
     let cur = this.root
-    for(let i = 0; i < prefix.length; i++){
+    for (let i = 0; i < prefix.length; i++) {
       let c = prefix.charAt(i)
-      if(cur.next.get(c) === null) return false
+      if (cur.next.get(c) === null) return false
       cur = cur.next.get(c)
     }
     return true
   }
 }
-

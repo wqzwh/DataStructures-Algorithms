@@ -9,8 +9,7 @@
  */
 class Stack {
 
-  constructor(capacity) {
-  }
+  constructor(capacity) {}
 
   // 向栈添加元素
   push() {
@@ -28,12 +27,10 @@ class Stack {
   }
 
   // 栈中的大小
-  getSize() {
-  }
+  getSize() {}
 
   // 栈是否为空
-  isEmpty() {
-  }
+  isEmpty() {}
 
 }
 

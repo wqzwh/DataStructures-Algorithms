@@ -8,17 +8,17 @@
  */
 
 const removeElements = (head, val) => {
-  while(head !== null && head.val === val) {
+  while (head !== null && head.val === val) {
     let delNode = head
     head = delNode.next;
     delNode.next = null
   }
 
-  if(head === null) return head
+  if (head === null) return head
 
   let prev = head
-  while(prev.next !== null) {
-    if(prev.next.val === val) {
+  while (prev.next !== null) {
+    if (prev.next.val === val) {
       let delNode = prev.next
       prev.next = delNode.next
       delNode.next = null
@@ -40,8 +40,8 @@ const removeElements = (head, val) => {
   dummyHead.next = head
   let cur = dummyHead
 
-  while(cur.next !== null) {
-    if(cur.next.val === val) {
+  while (cur.next !== null) {
+    if (cur.next.val === val) {
       cur.next = cur.next.next
     } else {
       cur = cur.next
@@ -56,11 +56,11 @@ const removeElements = (head, val) => {
  *
  */
 const removeElements = (head, val) => {
-  if(head === null) return head
+  if (head === null) return head
 
   let res = removeElements(head.next, val)
 
-  if(head.val === val) {
+  if (head.val === val) {
     return res
   } else {
     head.next = res

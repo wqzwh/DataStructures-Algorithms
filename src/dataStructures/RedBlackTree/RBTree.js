@@ -39,7 +39,7 @@ class RBTree {
 
   // 判断node节点的颜色
   [_isRed](node) {
-    if(node === null) return this.BLACK
+    if (node === null) return this.BLACK
     return node.color
   }
 
@@ -111,14 +111,14 @@ class RBTree {
   }
 
   [_add](node, key, value) {
-    if(node === null) {
+    if (node === null) {
       this.size++
       return new Node(key, value)
     }
 
-    if(key < node.key) {
+    if (key < node.key) {
       node.left = this[_add](node.left, key, value)
-    } else if(key > node.key) {
+    } else if (key > node.key) {
       node.right = this[_add](node.right, key, value)
     } else {
       node.value = value
@@ -126,17 +126,17 @@ class RBTree {
 
     // 红黑树维护
     // 右子节点是红色并且左子节点不是红色 左旋转
-    if(this[_isRed](node.right) && !this[_isRed](node.left)) {
+    if (this[_isRed](node.right) && !this[_isRed](node.left)) {
       node = this[_leftRotate](node)
     }
 
     // 左子节点是红色并且左子节点的左节点是红色 右旋转
-    if(this[_isRed](node.left) && this[_isRed](node.left.left)) {
+    if (this[_isRed](node.left) && this[_isRed](node.left.left)) {
       node = this[_rightRotate](node)
     }
 
     // 左子节点是红色并且右子节点也是红色 颜色翻转
-    if(this[_isRed](node.left) && this[_isRed](node.right)) {
+    if (this[_isRed](node.left) && this[_isRed](node.right)) {
       node = this[_flipColors](node)
     }
 
@@ -145,10 +145,10 @@ class RBTree {
 
   // 根据key获得节点
   [_getNode](node, key) {
-    if(node === null) return null
-    if(key === node.key) return node
-    if(key < node.key) return this[_getNode](node.left, key)
-    if(key > node.key) return this[_getNode](node.right, key)
+    if (node === null) return null
+    if (key === node.key) return node
+    if (key < node.key) return this[_getNode](node.left, key)
+    if (key > node.key) return this[_getNode](node.right, key)
   }
 
   contains(key) {
@@ -162,7 +162,7 @@ class RBTree {
 
   set(key, value) {
     let node = this[_getNode](this.root, key)
-    if(node === null) return '不存在'
+    if (node === null) return '不存在'
     node.value = value
   }
 }

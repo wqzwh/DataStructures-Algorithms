@@ -7,7 +7,7 @@ const _find = Symbol('_find')
 class UnionFind {
   constructor(size) {
     this.parent = new Array(size)
-    for(let i = 0; i < this.parent.length; i++) {
+    for (let i = 0; i < this.parent.length; i++) {
       this.parent[i] = i
     }
   }
@@ -20,7 +20,7 @@ class UnionFind {
     const pRoot = this[_find](p)
     const qRoot = this[_find](q)
 
-    if(pRoot === qRoot) return
+    if (pRoot === qRoot) return
     this.parent[pRoot] = qRoot
   }
 
@@ -31,9 +31,9 @@ class UnionFind {
   // 查找元素p对应的集合编号
   // O(h)复杂度，h为树的高度
   [_find](p) {
-    if(p < 0 && p >= this.id.length) return '元素不合法'
+    if (p < 0 && p >= this.id.length) return '元素不合法'
 
-    while(p !== this.parent[p]) {
+    while (p !== this.parent[p]) {
       p = this.parent[p]
     }
     return p
