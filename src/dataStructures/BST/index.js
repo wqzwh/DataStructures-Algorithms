@@ -50,17 +50,30 @@ class BST {
     this.root = this[_add](this.root, element)
   }
 
-  // 添加元素的递归函数
-  // 返回插入新节点后二分搜索书的根
+  /**
+   * 添加元素的递归函数
+   * 返回插入新节点后二分搜索书的根
+   * 
+   * 1、如果element和node.element相等，则直接返回
+   * 2、如果element小于node.element并且node.left是空，则node.left = element
+   * 3、如果element大于node.element并且node.right是空，则node.right = element
+   * 4、如果element小于node.element，传入node.left, element，返回1继续执行
+   * 5、如果element大于于node.element，传入node.right, element，返回1继续执行
+   * 
+   * @param {*} node  节点
+   * @param {*} element 需要加入的元素
+   * @returns
+   * @memberof BST
+   */
   [_add](node, element) {
-    // if(element === curElement){
+    // if(element === node.element){
     //   return
-    // } else if(element < curElement && left === null) {
-    //   left = new Node(element)
+    // } else if(element < node.element && node.left === null) {
+    //   node.left = new Node(element)
     //   this.size++
     //   return
-    // } else if(element > curElement && right === null) {
-    //   right = new Node(element)
+    // } else if(element > node.element && node.right === null) {
+    //   node.right = new Node(element)
     //   this.size++
     //   return
     // }
