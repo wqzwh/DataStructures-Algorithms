@@ -171,7 +171,7 @@ class BST {
   // 查找最小元素
   findMin() {
     if (this.size === 0) return '该树为空'
-    this[_findMin](this.root).element
+    return this[_findMin](this.root).element
   }
 
   [_findMin](node) {
@@ -182,7 +182,7 @@ class BST {
   // 查找最大元素
   findMax() {
     if (this.size === 0) return '该树为空'
-    this[_findMax](this.root).element
+    return this[_findMax](this.root).element
   }
 
   [_findMax](node) {
@@ -210,7 +210,7 @@ class BST {
 
   // 删除最大元素
   removeMax() {
-    let ret = this.findMin()
+    let ret = this.findMax()
     this.root = this[_removeMax](this.root)
     return ret
   }
@@ -262,6 +262,7 @@ class BST {
         this.size--
         return nodeLeft
       }
+      // 第一种寻找后继元素作为根结点
       // 左子树和右子树都不为空
       // 找到比待删除节点大的最小节点，即待删除元素节点右子树的最小节点
       // 用这个节点代替待删除节点
@@ -271,6 +272,17 @@ class BST {
 
       node.left = node.right = null
       return successor
+
+      // 第二种寻找前驱元素作为根结点
+      // 寻找待删除节点的左子树上寻找最大值来替换
+      // let predecessor = this[_findMax](node.left)
+      // predecessor.left = this[_removeMax](node.left)
+      // predecessor.right = node.right
+
+      // node.left = node.right = null
+      // return predecessor
     }
   }
 }
+
+module.exports = BST

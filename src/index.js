@@ -12,6 +12,9 @@
 // 链表性能测试
 // require('./test/llistTest.js')
 
+// bst树测试
+require('./test/bstTest.js')
+
 /**
  *
  * 算法测试
@@ -29,4 +32,4 @@
 // 归并排序
 // require('./test/algorithm/mergeSortTest.js')
 // 快速排序2
-require('./test/algorithm/quickSortTest.js')
+// require('./test/algorithm/quickSortTest.js')
