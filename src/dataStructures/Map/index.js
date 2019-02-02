@@ -42,20 +42,20 @@ class LlistMap {
 
   // 是否包含元素
   contains(key) {
-    return this[getNode](key) === null
+    return this[getNode](key) !== null
   }
 
   // 查询节点
   get(key) {
-    let node = this[getNode](key)
+    const node = this[getNode](key)
     return node === null ? null : node.value
   }
 
   // 添加元素
   add(key, value) {
-    let node = this[getNode](key)
+    const node = this[getNode](key)
     if (node === null) {
-      this.dummyHead.next = new Node(key, value, dummyHead.next)
+      this.dummyHead.next = new Node(key, value, this.dummyHead.next)
       this[size]++
     } else {
       node.value = value
@@ -64,7 +64,7 @@ class LlistMap {
 
   // 设置元素
   set(key, value) {
-    let node = this[getNode](key)
+    const node = this[getNode](key)
     if (node === null) return '没有该元素'
     node.value = value
   }
@@ -74,7 +74,7 @@ class LlistMap {
     let cur = this.dummyHead.next
     while (cur.next !== null) {
       if (cur.next.key === key) {
-        let retNode = cur.next
+        const retNode = cur.next
         cur.next = retNode.next
         retNode.next = null
         this[size]--

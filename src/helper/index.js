@@ -33,7 +33,7 @@ const Helper = {
     if (rangL > rangR) return
     const arr = new Array(n)
     for (let i = 0; i < n; i++) {
-      arr[i] = parseInt(Math.random() * (rangR - rangL + 1) + rangL, 10);
+      arr[i] = parseInt(Math.random() * (rangR - rangL + 1) + rangL, 10)
     }
     return arr
   },

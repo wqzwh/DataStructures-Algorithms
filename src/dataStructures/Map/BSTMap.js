@@ -65,20 +65,20 @@ class BSTMap {
   }
 
   get(key) {
-    let node = this[_getNode](this.root, key)
+    const node = this[_getNode](this.root, key)
     return node === null ? null : node.value
   }
 
   set(key, value) {
-    let node = this[_getNode](this.root, key)
+    const node = this[_getNode](this.root, key)
     if (node === null) return '不存在'
     node.value = value
   }
 
   // 删除操作
   // 返回删除的元素
-  remove(key, value) {
-    let node = this[_getNode](this.root, key)
+  remove(key) {
+    const node = this[_getNode](this.root, key)
     if (node === null) return null
     this.root = this[_remove](this.root, key)
     return node.value
@@ -100,15 +100,14 @@ class BSTMap {
 
       // 左子树为空
       if (node.left === null) {
-        let nodeRight = node.right
+        const nodeRight = node.right
         node.right = null
         this.size--
         return nodeRight
       }
       // 右子树为空
       if (node.right === null) {
-
-        let nodeLeft = node.left
+        const nodeLeft = node.left
         node.left = null
         this.size--
         return nodeLeft
@@ -116,7 +115,7 @@ class BSTMap {
       // 左子树和右子树都不为空
       // 找到比待删除节点大的最小节点，即待删除元素节点右子树的最小节点
       // 用这个节点代替待删除节点
-      let successor = this[_findMin](node.right)
+      const successor = this[_findMin](node.right)
       successor.right = this[_removeMin](node.right)
       successor.left = node.left
 
@@ -127,7 +126,7 @@ class BSTMap {
 
   [_removeMin](node) {
     if (node.left === null) {
-      let rightNode = node.right
+      const rightNode = node.right
       node.right = null
       this.size--
       return rightNode
