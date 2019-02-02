@@ -23,6 +23,8 @@ const _findMax = Symbol('_findMax')
 const _removeMin = Symbol('_removeMin')
 const _removeMax = Symbol('_removeMax')
 const _remove = Symbol('_remove')
+const _floor = Symbol('_floor')
+const _ceil = Symbol('_ceil')
 class BST {
   constructor() {
     this.root = null
@@ -53,13 +55,13 @@ class BST {
   /**
    * 添加元素的递归函数
    * 返回插入新节点后二分搜索书的根
-   * 
+   *
    * 1、如果element和node.element相等，则直接返回
    * 2、如果element小于node.element并且node.left是空，则node.left = element
    * 3、如果element大于node.element并且node.right是空，则node.right = element
    * 4、如果element小于node.element，传入node.left, element，返回1继续执行
    * 5、如果element大于于node.element，传入node.right, element，返回1继续执行
-   * 
+   *
    * @param {*} node  节点
    * @param {*} element 需要加入的元素
    * @returns
@@ -122,10 +124,10 @@ class BST {
 
   // 非递归实现前序遍历
   preOrderNr() {
-    let stack = new Stack()
+    const stack = new Stack()
     stack.push(this.root)
     while (!stack.isEmpty()) {
-      let cur = stack.pop()
+      const cur = stack.pop()
       console.log('访问了节点', cur.element)
       if (cur.right !== null) stack.push(cur.right)
       if (cur.left !== null) stack.push(cur.left)
@@ -158,10 +160,10 @@ class BST {
 
   // 广度优先遍历
   levelOrder() {
-    let q = new QueueList()
+    const q = new QueueList()
     q.enqueue(this.root)
     while (!q.isEmpty()) {
-      let cur = q.dequeue()
+      const cur = q.dequeue()
       console.log('访问了当前节点', node)
       if (cur.left !== null) q.enqueue(cur.left)
       if (cur.right !== null) q.enqueue(cur.right)
@@ -192,14 +194,14 @@ class BST {
 
   // 删除最小元素
   removeMin() {
-    let ret = this.findMin()
+    const ret = this.findMin()
     this.root = this[_removeMin](this.root)
     return ret
   }
 
   [_removeMin](node) {
     if (node.left === null) {
-      let rightNode = node.right
+      const rightNode = node.right
       node.right = null
       this.size--
       return rightNode
@@ -210,14 +212,14 @@ class BST {
 
   // 删除最大元素
   removeMax() {
-    let ret = this.findMax()
+    const ret = this.findMax()
     this.root = this[_removeMax](this.root)
     return ret
   }
 
   [_removeMax](node) {
     if (node.right === null) {
-      let leftNode = node.left
+      const leftNode = node.left
       node.left = null
       this.size--
       return leftNode
@@ -249,15 +251,14 @@ class BST {
 
       // 左子树为空
       if (node.left === null) {
-        let nodeRight = node.right
+        const nodeRight = node.right
         node.right = null
         this.size--
         return nodeRight
       }
       // 右子树为空
       if (node.right === null) {
-
-        let nodeLeft = node.left
+        const nodeLeft = node.left
         node.left = null
         this.size--
         return nodeLeft
@@ -266,7 +267,7 @@ class BST {
       // 左子树和右子树都不为空
       // 找到比待删除节点大的最小节点，即待删除元素节点右子树的最小节点
       // 用这个节点代替待删除节点
-      let successor = this[_findMin](node.right)
+      const successor = this[_findMin](node.right)
       successor.right = this[_removeMin](node.right)
       successor.left = node.left
 
@@ -281,6 +282,58 @@ class BST {
 
       // node.left = node.right = null
       // return predecessor
+    }
+  }
+
+  /**
+   * 如果element存在
+   *  那么floor , ceil就是element值自身
+   *
+   * 如果element不存在则
+   *  floor：是最接近element且小于element的节点
+   *  ceil：是最接近element且大于element的节点
+   */
+  floor(element) {
+    const node = this[_floor](this.root, element)
+    if (node) return this[_floor](this.root, element).element
+    return '不存在floor'
+  }
+
+  [_floor](node, element) {
+    if (node === null) return null
+
+    if (node.element === element) return node
+
+    if (node.element > element) {
+      return this[_floor](node.left, element)
+    }
+
+    if (node.element < element) {
+      const tempNode = this[_floor](node.right, element)
+      if (tempNode !== null) return tempNode
+      return node
+    }
+  }
+
+  ceil(element) {
+    const node = this[_ceil](this.root, element)
+    if (node) return this[_ceil](this.root, element).element
+    return '不存在ceil'
+  }
+
+  [_ceil](node, element) {
+    if (node === null) return null
+
+    if (node.element === element) return node
+
+    if (node.element < element) {
+      return this[_ceil](node.right, element)
+    }
+
+    if (node.element > element) {
+      const tempNode = this[_ceil](node.left, element)
+      if (tempNode !== null) return tempNode
+      return node
     }
   }
 }
