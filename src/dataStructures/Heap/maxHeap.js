@@ -40,7 +40,7 @@ class MaxHeap {
     return index * 2 + 2
   }
 
-  // 添加元素
+  // 添加元素 O(logn)
   add(element) {
     this.data.addLast(element)
     this[_siftUp](this.data.getSize() - 1)
@@ -51,18 +51,18 @@ class MaxHeap {
       index > 0 &&
       this.data.get(this[_parentIndex](index)) < this.data.get(index)
     ) {
-      this.data.swap(index, this[_parentIndex])
+      this.data.swap(index, this[_parentIndex](index))
       index = this[_parentIndex](index)
     }
   }
 
   // 找到堆中最大的元素
   findMax() {
-    if (this.data.getSize()) return '堆为空'
+    if (!this.data.getSize()) return '堆为空'
     return this.data.get(0)
   }
 
-  // 取出堆中最大元素
+  // 取出堆中最大元素 O(logn)
   extractMax() {
     const ret = this.findMax()
     this.data.swap(0, this.data.getSize() - 1)
@@ -75,32 +75,33 @@ class MaxHeap {
     while (this[_leftChildIndex](index) < this.data.getSize()) {
       let j = this[_leftChildIndex](index)
       if (
-        (j + 1 < this.data,
-          getSize() && this.data.get(j + 1) > this.data.get(j))
+        j + 1 < this.data.getSize() &&
+        this.data.get(j + 1) > this.data.get(j)
       ) {
-        j = this[_rightChildIndex](j)
+        j = this[_rightChildIndex](index)
       }
-      if (this.data.get(index) > this.data.get(j)) {
+      if (this.data.get(index) >= this.data.get(j)) {
         break
       }
-      this.data.swap(k, j)
-      k = j
+      this.data.swap(index, j)
+      index = j
     }
   }
 
-  // 取出堆中最的元素，并且替换成元素element
+  // 取出堆中最大的元素，并且替换成元素element
   replace(element) {
     const ret = this.findMax()
-    this.data.set(0, ret)
+    this.data.set(0, element)
     this[_siftDowm](0)
     return ret
   }
 
-  // 将任意数组整理成堆的形状
+  // 将任意数组整理成堆的形状 O(n)
   heapify(arr) {
-    this.data = arr
+    this.data = new CArray('', arr)
     for (let i = this[_parentIndex](arr.length - 1); i >= 0; i--) {
       this[_siftDowm](i)
     }
   }
 }
+module.exports = MaxHeap

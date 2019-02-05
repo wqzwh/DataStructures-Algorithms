@@ -13,7 +13,10 @@
 // require('./test/llistTest.js')
 
 // bst树测试
-require('./test/bstTest.js')
+// require('./test/bstTest.js')
+
+// 堆测试
+require('./test/heapTest.js')
 
 /**
  *

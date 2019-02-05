@@ -78,6 +78,17 @@ const Helper = {
     const tem = arr[b]
     arr[b] = arr[a]
     arr[a] = tem
+  },
+
+  /**
+   *
+   * 范围随机数
+   * max - 期望的最大值
+   * min - 期望的最小值
+   *
+   */
+  random(min, max) {
+    return Math.floor(Math.random() * (max - min + 1) + min)
   }
 }
 
