@@ -56,24 +56,36 @@ class SegmentTree {
       return
     }
 
-    let leftTreeIndex = this[_leftChildIndex](treeIndex)
-    let rightTreeIndex = this[_rightChildIndex](treeIndex)
+    const leftTreeIndex = this[_leftChildIndex](treeIndex)
+    const rightTreeIndex = this[_rightChildIndex](treeIndex)
 
-    let mid = Math.floor(l + (r - l) / 2)
+    const mid = Math.floor(l + (r - l) / 2)
     this[_buildSegmentTree](leftTreeIndex, l, mid)
     this[_buildSegmentTree](rightTreeIndex, mid + 1, r)
 
-    this[_tree][treeIndex] = this.merge(this[_tree][leftTreeIndex], this[_tree][rightTreeIndex])
+    this[_tree][treeIndex] = this.merge(
+      this[_tree][leftTreeIndex],
+      this[_tree][rightTreeIndex]
+    )
   }
 
   /**
    *
+   * O(logn)
    * 根据区间在线段树中查找
    * [ql, qr]
    *
    */
   query(ql, qr) {
-    if (ql < 0 || ql > this[_data].length || qr < 0 || qr > this[_data].length || ql > qr) return '区间不合法'
+    if (
+      ql < 0 ||
+      ql >= this[_data].length ||
+      qr < 0 ||
+      qr >= this[_data].length ||
+      ql > qr
+    ) {
+      return '区间不合法'
+    }
     return this[_query](0, 0, this[_data].length - 1, ql, qr)
   }
 
@@ -105,13 +117,13 @@ class SegmentTree {
     }
 
     // 如果区间正在即在左边右在右边
-    let leftRsult = this[_query](leftTreeIndex, l, mid, ql, mid)
-    let rightRsult = this[_query](rightTreeIndex, mid + 1, r, mid + 1, qr)
+    const leftRsult = this[_query](leftTreeIndex, l, mid, ql, mid)
+    const rightRsult = this[_query](rightTreeIndex, mid + 1, r, mid + 1, qr)
 
     return this.merge(leftRsult, rightRsult)
   }
 
-  // 更新操作
+  // 更新操作 O(logn)
   set(index, element) {
     if (index < 0 || index > this[_data].length) return '索引不合法'
     this[_data][index] = element
@@ -134,6 +146,10 @@ class SegmentTree {
       this[_set](leftTreeIndex, l, mid, index, element)
     }
 
-    this[_tree][treeIndex] = this.merge(this[_tree][leftTreeIndex], this[_tree][rightTreeIndex])
+    this[_tree][treeIndex] = this.merge(
+      this[_tree][leftTreeIndex],
+      this[_tree][rightTreeIndex]
+    )
   }
 }
+module.exports = SegmentTree

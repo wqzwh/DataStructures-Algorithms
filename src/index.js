@@ -16,7 +16,10 @@
 // require('./test/bstTest.js')
 
 // 堆测试
-require('./test/heapTest.js')
+// require('./test/heapTest.js')
+
+// 线段树测试
+require('./test/segmentTreeTest.js')
 
 /**
  *
