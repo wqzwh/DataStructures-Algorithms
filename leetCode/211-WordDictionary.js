@@ -50,12 +50,10 @@ class BSTMap {
   }
 
   get(key) {
-    let node = this[_getNode](this.root, key)
+    const node = this[_getNode](this.root, key)
     return node === null ? null : node.value
   }
 }
-
-
 
 class Node {
   constructor(isWord = false) {
@@ -67,20 +65,20 @@ class Node {
 /**
  * Initialize your data structure here.
  */
-var WordDictionary = function () {
+var WordDictionary = function() {
   this.size = 0
   this.root = new Node()
-};
+}
 
 /**
  * Adds a word into the data structure.
  * @param {string} word
  * @return {void}
  */
-WordDictionary.prototype.addWord = function (word) {
+WordDictionary.prototype.addWord = function(word) {
   let cur = this.root
   for (let i = 0; i < word.length; i++) {
-    let c = word.charAt(i)
+    const c = word.charAt(i)
     if (cur.next.get(c) === null) cur.next.add(c, new Node())
     cur = cur.next.get(c)
   }
@@ -88,21 +86,21 @@ WordDictionary.prototype.addWord = function (word) {
     cur.isWord = true
     this.size++
   }
-};
+}
 
 /**
  * Returns if the word is in the data structure. A word could contain the dot character '.' to represent any one letter.
  * @param {string} word
  * @return {boolean}
  */
-WordDictionary.prototype.search = function (word) {
+WordDictionary.prototype.search = function(word) {
   return this._match(this.root, word, 0)
-};
+}
 
-WordDictionary.prototype._match = function (node, word, index) {
+WordDictionary.prototype._match = function(node, word, index) {
   if (index === word.length) return node.isWord
 
-  let c = word.charAt(index)
+  const c = word.charAt(index)
   if (c !== '.') {
     if (node.next.get(c) === null) {
       return false
@@ -110,9 +108,13 @@ WordDictionary.prototype._match = function (node, word, index) {
       return this._match(node.next.get(c), word, index + 1)
     }
   } else {
-    let keyValue = node.next.root['key']
-    if (this._match(node.next.get(keyValue), word, index + 1)) {
-      return true
+    for (const key in node.next.root) {
+      if (key === 'key') {
+        const keyValue = node.next.root[key]
+        if (this._match(node.next.get(keyValue), word, index + 1)) {
+          return true
+        }
+      }
     }
     return false
   }

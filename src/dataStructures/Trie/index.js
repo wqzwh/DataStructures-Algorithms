@@ -28,7 +28,7 @@ class Trie {
   add(word, value) {
     let cur = this.root
     for (let i = 0; i < word.length; i++) {
-      let c = word.charAt(i)
+      const c = word.charAt(i)
       if (cur.next.get(c) === null) cur.next.add(c, new Node())
       cur = cur.next.get(c)
     }
@@ -43,7 +43,7 @@ class Trie {
   contains(word) {
     let cur = this.root
     for (let i = 0; i < word.length; i++) {
-      let c = word.charAt(i)
+      const c = word.charAt(i)
       if (cur.next.get(c) === null) return false
       cur = cur.next.get(c)
     }
@@ -54,10 +54,11 @@ class Trie {
   isPrefix(prefix) {
     let cur = this.root
     for (let i = 0; i < prefix.length; i++) {
-      let c = prefix.charAt(i)
+      const c = prefix.charAt(i)
       if (cur.next.get(c) === null) return false
       cur = cur.next.get(c)
     }
     return true
   }
 }
+module.exports = Trie
