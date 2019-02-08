@@ -19,7 +19,10 @@
 // require('./test/heapTest.js')
 
 // 线段树测试
-require('./test/segmentTreeTest.js')
+// require('./test/segmentTreeTest.js')
+
+// trie树测试
+require('./test/trieTest.js')
 
 /**
  *

@@ -17,38 +17,40 @@ const _getNode = Symbol('_getNode')
 const _remove = Symbol('_remove')
 const _findMin = Symbol('_findMin')
 const _removeMin = Symbol('_removeMin')
-
+const _root = Symbol('_root')
+const _size = Symbol('_size')
 class BSTMap {
   constructor() {
-    this.root = null
-    this.size = 0
+    this[_root] = null
+    this[_size] = 0
   }
 
   getSize() {
-    return this.size
+    return this[_size]
   }
 
   isEmpty() {
-    return this.size === 0
+    return this[_size] === 0
   }
 
   add(key, value) {
-    this.root = this[_add](this.root, key, value)
+    this[_root] = this[_add](this[_root], key, value)
   }
 
   [_add](node, key, value) {
     if (node === null) {
-      this.size++
+      this[_size]++
       return new Node(key, value)
     }
 
-    if (key < node.key) {
+    if (key.charCodeAt() < node.key.charCodeAt()) {
       node.left = this[_add](node.left, key, value)
-    } else if (key > node.key) {
+    } else if (key.charCodeAt() > node.key.charCodeAt()) {
       node.right = this[_add](node.right, key, value)
     } else {
       node.value = value
     }
+
     return node
   }
 
@@ -56,21 +58,25 @@ class BSTMap {
   [_getNode](node, key) {
     if (node === null) return null
     if (key === node.key) return node
-    if (key < node.key) return this[_getNode](node.left, key)
-    if (key > node.key) return this[_getNode](node.right, key)
+    if (key.charCodeAt() < node.key.charCodeAt()) {
+      return this[_getNode](node.left, key)
+    }
+    if (key.charCodeAt() > node.key.charCodeAt()) {
+      return this[_getNode](node.right, key)
+    }
   }
 
   contains(key) {
-    return this[_getNode](this.root, key) !== null
+    return this[_getNode](this[_root], key) !== null
   }
 
   get(key) {
-    const node = this[_getNode](this.root, key)
+    const node = this[_getNode](this[_root], key)
     return node === null ? null : node.value
   }
 
   set(key, value) {
-    const node = this[_getNode](this.root, key)
+    const node = this[_getNode](this[_root], key)
     if (node === null) return '不存在'
     node.value = value
   }
@@ -78,9 +84,10 @@ class BSTMap {
   // 删除操作
   // 返回删除的元素
   remove(key) {
-    const node = this[_getNode](this.root, key)
+    debugger
+    const node = this[_getNode](this[_root], key)
     if (node === null) return null
-    this.root = this[_remove](this.root, key)
+    this[_root] = this[_remove](this[_root], key)
     return node.value
   }
 
@@ -89,10 +96,10 @@ class BSTMap {
       return null
     }
 
-    if (key < node.key) {
+    if (key.charCodeAt() < node.key.charCodeAt()) {
       node.left = this[_remove](node.left, key)
       return node
-    } else if (key > node.key) {
+    } else if (key.charCodeAt() > node.key.charCodeAt()) {
       node.right = this[_remove](node.right, key)
       return node
     } else {
@@ -102,14 +109,14 @@ class BSTMap {
       if (node.left === null) {
         const nodeRight = node.right
         node.right = null
-        this.size--
+        this[_size]--
         return nodeRight
       }
       // 右子树为空
       if (node.right === null) {
         const nodeLeft = node.left
         node.left = null
-        this.size--
+        this[_size]--
         return nodeLeft
       }
       // 左子树和右子树都不为空
@@ -128,7 +135,7 @@ class BSTMap {
     if (node.left === null) {
       const rightNode = node.right
       node.right = null
-      this.size--
+      this[_size]--
       return rightNode
     }
     node.left = this[_removeMin](node.left)
