@@ -22,7 +22,10 @@
 // require('./test/segmentTreeTest.js')
 
 // trie树测试
-require('./test/trieTest.js')
+// require('./test/trieTest.js')
+
+// 并查集测试
+require('./test/unionFindTest.js')
 
 /**
  *

@@ -16,6 +16,7 @@ class UnionFind {
     return this[_find](p) === this[_find](q)
   }
 
+  // O(h)复杂度，h为树的高度
   unionElement(p, q) {
     const pRoot = this[_find](p)
     const qRoot = this[_find](q)
@@ -39,3 +40,4 @@ class UnionFind {
     return p
   }
 }
+module.exports = UnionFind

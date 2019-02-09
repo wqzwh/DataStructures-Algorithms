@@ -52,3 +52,4 @@ class UnionFind {
     return p
   }
 }
+module.exports = UnionFind

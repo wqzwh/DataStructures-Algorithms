@@ -38,3 +38,4 @@ class UnionFind {
     return this.id[p]
   }
 }
+module.exports = UnionFind

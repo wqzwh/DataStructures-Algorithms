@@ -50,3 +50,4 @@ class UnionFind {
     return this.parent[p]
   }
 }
+module.exports = UnionFind
