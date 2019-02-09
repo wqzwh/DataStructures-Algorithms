@@ -105,7 +105,7 @@ class LList {
   // 时间复杂度均为O(n)
   contains(element) {
     let cur = this.dummyHead.next
-    while (cur.element !== null) {
+    while (cur && cur.element !== null) {
       if (cur.element === element) return true
       cur = cur.next
     }
@@ -120,7 +120,7 @@ class LList {
     for (let i = 0; i < index; i++) {
       prev = prev.next
     }
-    let retNode = prev.next
+    const retNode = prev.next
     prev.next = retNode.next
     retNode.next = null
     this[_size]--
@@ -143,7 +143,7 @@ class LList {
     let cur = this.dummyHead.next
     while (cur !== null) {
       if (cur.next.element === element) {
-        let retNode = cur.next
+        const retNode = cur.next
         cur.next = retNode.next
         retNode.next = null
         this[_size]--

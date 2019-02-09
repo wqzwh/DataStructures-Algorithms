@@ -35,3 +35,4 @@ class BSTSet {
     return this.bst.isEmpty()
   }
 }
+module.exports = BSTSet

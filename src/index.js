@@ -31,7 +31,10 @@
 // require('./test/avlTreeTest.js')
 
 // 映射测试
-require('./test/mapTest.js')
+// require('./test/mapTest.js')
+
+// 集合测试
+require('./test/setTest.js')
 
 /**
  *

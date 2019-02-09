@@ -36,3 +36,4 @@ class LListSet {
     return this.llist.isEmpty()
   }
 }
+module.exports = LListSet
