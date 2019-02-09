@@ -85,3 +85,4 @@ class LlistMap {
     return null
   }
 }
+module.exports = LlistMap

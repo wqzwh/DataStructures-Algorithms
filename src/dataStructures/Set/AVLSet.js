@@ -35,3 +35,4 @@ class AVLSet {
     return this.avl.contains(element)
   }
 }
+module.exports = AVLSet

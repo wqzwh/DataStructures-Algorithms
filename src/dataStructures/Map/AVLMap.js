@@ -39,3 +39,4 @@ class AVLMap {
     return this.avl.remove(key)
   }
 }
+module.exports = AVLMap

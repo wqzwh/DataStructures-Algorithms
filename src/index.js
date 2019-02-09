@@ -28,7 +28,10 @@
 // require('./test/unionFindTest.js')
 
 // 树测试
-require('./test/avlTreeTest.js')
+// require('./test/avlTreeTest.js')
+
+// 映射测试
+require('./test/mapTest.js')
 
 /**
  *
