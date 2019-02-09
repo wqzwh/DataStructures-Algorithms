@@ -25,7 +25,10 @@
 // require('./test/trieTest.js')
 
 // 并查集测试
-require('./test/unionFindTest.js')
+// require('./test/unionFindTest.js')
+
+// 树测试
+require('./test/avlTreeTest.js')
 
 /**
  *

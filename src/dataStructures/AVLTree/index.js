@@ -47,15 +47,15 @@ class AVLTree {
     const keys = new BST()
     this[_inOrder](this.root, keys)
 
-    for(let i = 1; i < keys.getSize(); i++) {
-      if(keys.get(i - 1) > keys.get(i) > 0) return false
+    for (let i = 1; i < keys.getSize(); i++) {
+      if (keys.get(i - 1) > keys.get(i) > 0) return false
     }
     return true
   }
 
   // 中序排序方法
   [_inOrder](node, keys) {
-    if(node === null) return
+    if (node === null) return
     this[_inOrder](node.left, keys)
     keys.add(node.key)
     this[_inOrder](node.right, keys)
@@ -63,13 +63,13 @@ class AVLTree {
 
   // 判断二叉树是否是平衡树
   isBalanced() {
-    return this[_isBalanced](node)
+    return this[_isBalanced](this.root)
   }
 
   [_isBalanced](node) {
-    if(node === null) return true
+    if (node === null) return true
     const balanceFactor = this[_getBalanceFactor](node)
-    if(Math.abs(balanceFactor) > 1) return false
+    if (Math.abs(balanceFactor) > 1) return false
     return this[_isBalanced](node.left) && this[_isBalanced](node.right)
   }
 
@@ -78,21 +78,22 @@ class AVLTree {
   }
 
   [_add](node, key, value) {
-    if(node === null) {
+    if (node === null) {
       this.size++
       return new Node(key, value)
     }
 
-    if(key < node.key) {
+    if (key < node.key) {
       node.left = this[_add](node.left, key, value)
-    } else if(key > node.key) {
+    } else if (key > node.key) {
       node.right = this[_add](node.right, key, value)
     } else {
       node.value = value
     }
 
     // 更新height
-    node.height = 1 + Math.max(this[_getHeight](node.left), this[_getHeight](node.right))
+    node.height =
+      1 + Math.max(this[_getHeight](node.left), this[_getHeight](node.right))
 
     // 更新平衡因子
     const balanceFactor = this[_getBalanceFactor](node)
@@ -101,19 +102,23 @@ class AVLTree {
 
     // 平衡性维护
     // LL
-    if(balanceFactor > 1 && this[_getBalanceFactor](node.left) >= 0) return this[_rightRotate](node)
+    if (balanceFactor > 1 && this[_getBalanceFactor](node.left) >= 0) {
+      return this[_rightRotate](node)
+    }
 
     // RR
-    if(balanceFactor < -1 && this[_getBalanceFactor](node.left) <= 0) return this[_leftRotate](node)
+    if (balanceFactor < -1 && this[_getBalanceFactor](node.right) <= 0) {
+      return this[_leftRotate](node)
+    }
 
     // LR
-    if(balanceFactor > 1 && this[_getBalanceFactor](node.left) < 0) {
+    if (balanceFactor > 1 && this[_getBalanceFactor](node.left) < 0) {
       node.left = this[_leftRotate](node.left)
       return this[_rightRotate](node)
     }
 
     // RL
-    if(balanceFactor < -1 && this[_getBalanceFactor](node.left) > 0) {
+    if (balanceFactor < -1 && this[_getBalanceFactor](node.right) > 0) {
       node.right = this[_rightRotate](node.right)
       return this[_leftRotate](node)
     }
@@ -123,21 +128,21 @@ class AVLTree {
 
   // 获取节点的高度值
   [_getHeight](node) {
-    if(node === null) return 0
+    if (node === null) return 0
     return node.height
   }
 
   // 根据key获得节点
   [_getNode](node, key) {
-    if(node === null) return null
-    if(key === node.key) return node
-    if(key < node.key) return this[_getNode](node.left, key)
-    if(key > node.key) return this[_getNode](node.right, key)
+    if (node === null) return null
+    if (key === node.key) return node
+    if (key < node.key) return this[_getNode](node.left, key)
+    if (key > node.key) return this[_getNode](node.right, key)
   }
 
   // 计算每个节点的平衡因子的差
   [_getBalanceFactor](node) {
-    if(node === null) return 0
+    if (node === null) return 0
     return this[_getHeight](node.left) - this[_getHeight](node.right)
   }
 
@@ -165,7 +170,8 @@ class AVLTree {
     node.left = T3
 
     // 更新height
-    node.height = Math.max(this[_getHeight](node.left), this[_getHeight](node.right)) + 1
+    node.height =
+      Math.max(this[_getHeight](node.left), this[_getHeight](node.right)) + 1
     x.height = Math.max(this[_getHeight](x.left), this[_getHeight](x.right)) + 1
 
     return x
@@ -195,7 +201,8 @@ class AVLTree {
     node.right = T3
 
     // 更新height
-    node.height = Math.max(this[_getHeight](node.left), this[_getHeight](node.right)) + 1
+    node.height =
+      Math.max(this[_getHeight](node.left), this[_getHeight](node.right)) + 1
     x.height = Math.max(this[_getHeight](x.left), this[_getHeight](x.right)) + 1
 
     return x
@@ -206,52 +213,51 @@ class AVLTree {
   }
 
   get(key) {
-    let node = this[_getNode](this.root, key)
+    const node = this[_getNode](this.root, key)
     return node === null ? null : node.value
   }
 
   set(key, value) {
-    let node = this[_getNode](this.root, key)
-    if(node === null) return '不存在'
+    const node = this[_getNode](this.root, key)
+    if (node === null) return '不存在'
     node.value = value
   }
 
   // 删除操作
   // 返回删除的元素
   remove(key, value) {
-    let node = this[_getNode](this.root, key)
-    if(node === null) return null
+    const node = this[_getNode](this.root, key)
+    if (node === null) return null
     this.root = this[_remove](this.root, key)
     return node.value
   }
 
   [_remove](node, key) {
-    if(node === null) {
+    if (node === null) {
       return null
     }
 
     let retNode = ''
 
-    if(key < node.key) {
+    if (key < node.key) {
       node.left = this[_remove](node.left, key)
       retNode = node
-    } else if(key > node.key) {
+    } else if (key > node.key) {
       node.right = this[_remove](node.right, key)
       retNode = node
     } else {
       // key === node.key
 
       // 左子树为空
-      if(node.left === null) {
-        let nodeRight = node.right
+      if (node.left === null) {
+        const nodeRight = node.right
         node.right = null
         this.size--
         retNode = nodeRight
       }
       // 右子树为空
-      else if(node.right === null) {
-
-        let nodeLeft = node.left
+      else if (node.right === null) {
+        const nodeLeft = node.left
         node.left = null
         this.size--
         retNode = nodeLeft
@@ -260,7 +266,7 @@ class AVLTree {
       // 找到比待删除节点大的最小节点，即待删除元素节点右子树的最小节点
       // 用这个节点代替待删除节点
       else {
-        let successor = this[_findMin](node.right)
+        const successor = this[_findMin](node.right)
         successor.right = this[_remove](node.right, successor.key)
         successor.left = node.left
 
@@ -269,29 +275,35 @@ class AVLTree {
       }
     }
 
-    if(retNode === null) return null
+    if (retNode === null) return null
 
     // 更新height
-    retNode.height = 1 + Math.max(this[_getHeight](retNode.left), this[_getHeight](retNode.right))
+    retNode.height =
+      1 +
+      Math.max(this[_getHeight](retNode.left), this[_getHeight](retNode.right))
 
     // 更新平衡因子
     const balanceFactor = this[_getBalanceFactor](retNode)
 
     // 平衡性维护
     // LL
-    if(balanceFactor > 1 && this[_getBalanceFactor](retNode.left) >= 0) return this[_rightRotate](retNode)
+    if (balanceFactor > 1 && this[_getBalanceFactor](retNode.left) >= 0) {
+      return this[_rightRotate](retNode)
+    }
 
     // RR
-    if(balanceFactor < -1 && this[_getBalanceFactor](retNode.left) <= 0) return this[_leftRotate](retNode)
+    if (balanceFactor < -1 && this[_getBalanceFactor](retNode.right) <= 0) {
+      return this[_leftRotate](retNode)
+    }
 
     // LR
-    if(balanceFactor > 1 && this[_getBalanceFactor](retNode.left) < 0) {
+    if (balanceFactor > 1 && this[_getBalanceFactor](retNode.left) < 0) {
       retNode.left = this[_leftRotate](retNode.left)
       return this[_rightRotate](retNode)
     }
 
     // RL
-    if(balanceFactor < -1 && this[_getBalanceFactor](retNode.left) > 0) {
+    if (balanceFactor < -1 && this[_getBalanceFactor](retNode.right) > 0) {
       retNode.right = this[_rightRotate](retNode.right)
       return this[_leftRotate](retNode)
     }
@@ -300,7 +312,8 @@ class AVLTree {
   }
 
   [_findMin](node) {
-    if(node.left === null) return node
+    if (node.left === null) return node
     return this[_findMin](node.left)
   }
 }
+module.exports = AVLTree
