@@ -34,7 +34,10 @@
 // require('./test/mapTest.js')
 
 // 集合测试
-require('./test/setTest.js')
+// require('./test/setTest.js')
+
+// 红黑树测试
+require('./test/rbTreeTest.js')
 
 /**
  *

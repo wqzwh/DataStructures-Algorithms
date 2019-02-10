@@ -3,16 +3,15 @@
  * 红黑树
  *
  */
-
+const RED = true
+const BLACK = false
 class Node {
-  RED = true
-  BLACK = false
   constructor(key = null, value = null, left = null, right = null) {
     this.key = key
     this.value = value
     this.left = left
     this.right = right
-    this.color = this.RED
+    this.color = RED
   }
 }
 
@@ -39,7 +38,7 @@ class RBTree {
 
   // 判断node节点的颜色
   [_isRed](node) {
-    if (node === null) return this.BLACK
+    if (node === null) return BLACK
     return node.color
   }
 
@@ -65,16 +64,17 @@ class RBTree {
     node.right = T3
     x.left = node
     x.color = node.color
-    node.color = this.RED
+    node.color = RED
 
     return x
   }
 
   // 翻转颜色
   [_flipColors](node) {
-    node.color = this.RED
-    node.left.color = this.BLACK
-    node.right.color = this.BLACK
+    node.color = RED
+    node.left.color = BLACK
+    node.right.color = BLACK
+    return node
   }
 
   // 右旋转
@@ -100,14 +100,14 @@ class RBTree {
     x.right = node
     node.left = T3
     x.color = node.color
-    node.color = this.RED
+    node.color = RED
 
     return x
   }
 
   add(key, value) {
     this.root = this[_add](this.root, key, value)
-    this.root = this.BLACK // 保持根节点为黑色
+    this.root.color = BLACK // 保持根节点为黑色
   }
 
   [_add](node, key, value) {
@@ -156,13 +156,14 @@ class RBTree {
   }
 
   get(key) {
-    let node = this[_getNode](this.root, key)
+    const node = this[_getNode](this.root, key)
     return node === null ? null : node.value
   }
 
   set(key, value) {
-    let node = this[_getNode](this.root, key)
+    const node = this[_getNode](this.root, key)
     if (node === null) return '不存在'
     node.value = value
   }
 }
+module.exports = RBTree
