@@ -37,7 +37,7 @@
 // require('./test/setTest.js')
 
 // 红黑树测试
-require('./test/rbTreeTest.js')
+// require('./test/rbTreeTest.js')
 
 /**
  *
@@ -46,9 +46,9 @@ require('./test/rbTreeTest.js')
  * */
 
 // 选择排序测试
-// require('./test/algorithm/selectSortTest')
+require('./test/algorithm/selectSortTest')
 // 插入排序测试
-// require('./test/algorithm/insertSortTest')
+require('./test/algorithm/insertSortTest')
 // 冒泡排序
 // require('./test/algorithm/bubbleSortTest')
 // 希尔排序

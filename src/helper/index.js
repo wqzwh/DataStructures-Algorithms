@@ -39,6 +39,27 @@ const Helper = {
   },
 
   /**
+   *
+   * 生成几乎有序的数组
+   * @param {*} n
+   * @param {*} swapTimes
+   */
+  nearlyOrderArray(n, swapTimes) {
+    const arr = new Array(n)
+    for (let i = 0; i < n; i++) {
+      arr[i] = i
+    }
+
+    for (let i = 0; i < swapTimes; i++) {
+      const a = parseInt(Math.random() * (n + 1), 10) % n
+      const b = parseInt(Math.random() * (n + 1), 10) % n
+      Helper.swap(arr, a, b)
+    }
+
+    return arr
+  },
+
+  /**
    * 测试算法性能函数
    * @param {*} sortName 排序名称
    * @param {*} sort 排序方法

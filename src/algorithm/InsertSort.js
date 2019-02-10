@@ -18,7 +18,7 @@ const insertSort = (arr, n) => {
 
     // 第二版
     const temp = arr[i] // 复制一份待比较的数据
-    let j
+    let j // 保存元素temp应该插入的位置
     for (j = i; j > 0 && arr[j - 1] > temp; j--) {
       if (arr[j] < arr[j - 1]) {
         arr[j] = arr[j - 1]
