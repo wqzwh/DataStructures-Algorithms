@@ -3,7 +3,7 @@ class CArray {
   // capacity 数组容量
   constructor(capacity = 10, arr = []) {
     this.data = arr.length ? new Array(arr.length) : new Array(capacity)
-    this.size = 0 // 数组元素个数
+    this.size = arr.length ? arr.length : 0 // 数组元素个数
   }
 
   // 向数组第一个位置添加一个元素 时间复杂度为O(n)
