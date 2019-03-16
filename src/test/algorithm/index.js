@@ -1,6 +1,6 @@
 const Helper = require('../../helper/index')
 // 插入排序
-const insertSort = require('../../algorithm/insertSort')
+const insertSort = require('../../algorithm/basicSort/insertSort')
 
 // 归并排序
 const mergeSort1 = require('../../algorithm/mergeSort/mergeSort.js')
@@ -14,13 +14,13 @@ const quickSort4 = require('../../algorithm/quickSort/quickSort4.js')
 const quickSort5 = require('../../algorithm/quickSort/quickSort5.js')
 
 // 选择排序
-const selectSort = require('../../algorithm/selectSort')
+const selectSort = require('../../algorithm/basicSort/selectSort')
 
 // 希尔排序
-const shellSort = require('../../algorithm/shellSort')
+const shellSort = require('../../algorithm/basicSort/shellSort')
 
 // 冒泡排序
-const bubbleSort = require('../../algorithm/bubbleSort')
+const bubbleSort = require('../../algorithm/basicSort/bubbleSort')
 
 // 堆排序
 const heapSort1 = require('../../algorithm/heapSort/heapSort1')
