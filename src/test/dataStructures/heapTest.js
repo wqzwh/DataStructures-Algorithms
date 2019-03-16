@@ -1,16 +1,15 @@
-const MaxHeap = require('../dataStructures/Heap/maxHeap.js')
-const Helper = require('../helper/index')
+const MaxHeap = require('../../dataStructures/Heap/maxHeap')
+const Helper = require('../../helper/index')
 const n = 1000000
 
 function testHeap(arr, flag) {
   const startTime = new Date()
+  const mh = new MaxHeap()
   if (!flag) {
-    const mh = new MaxHeap()
     for (let i = 0; i < n; i++) {
       mh.add(Helper.random(0, n))
     }
   } else {
-    const mh = new MaxHeap()
     mh.heapify(arr)
   }
   const endTime = new Date()
