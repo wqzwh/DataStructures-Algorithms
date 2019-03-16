@@ -23,7 +23,7 @@ const heapSort = (arr, n) => {
   }
 
   for (let i = n - 1; i > 0; i--) {
-    Helper.swap(arr, 0, n)
+    Helper.swap(arr, 0, i)
     shiftDown(arr, i, 0)
   }
 
