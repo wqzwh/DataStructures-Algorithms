@@ -50,8 +50,8 @@ class DenseGraph {
 
 // 建立迭代器
 class adjIterator {
-  constructor(SG, v) {
-    this.SG = SG // 图实例
+  constructor(DG, v) {
+    this.DG = DG // 图实例
     this.v = v // 定点个数
     this.index = -1 // 迭代的序数，默认是-1
   }
@@ -62,13 +62,13 @@ class adjIterator {
   }
 
   next() {
-    for (this.index += 1; this.index < this.SG[this.v].length; this.index++) {
-      if (this.SG[this.v][this.index]) return this.index
+    for (this.index += 1; this.index < this.DG[this.v].length; this.index++) {
+      if (this.DG[this.v][this.index]) return this.index
     }
     return -1
   }
 
   end() {
-    return this.index >= this.SG[this.v].length
+    return this.index >= this.DG[this.v].length
   }
 }
