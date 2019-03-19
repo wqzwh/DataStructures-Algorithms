@@ -72,3 +72,5 @@ class adjIterator {
     return this.index >= this.DG[this.v].length
   }
 }
+
+module.exports = DenseGraph

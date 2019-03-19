@@ -16,7 +16,7 @@
 // require('./test/dataStructures/bstTest.js')
 
 // 堆测试
-require('./test/dataStructures/heapTest.js')
+// require('./test/dataStructures/heapTest.js')
 
 // 线段树测试
 // require('./test/dataStructures/segmentTreeTest.js')
@@ -38,6 +38,9 @@ require('./test/dataStructures/heapTest.js')
 
 // 红黑树测试
 // require('./test/dataStructures/rbTreeTest.js')
+
+// 图测试
+require('./test/dataStructures/graphTest.js')
 
 /**
  *
