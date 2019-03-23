@@ -14,20 +14,20 @@ class adjIterator {
 
   begin() {
     this.index = 0
-    if (this.SG.length) return this.SG[this.index]
+    if (this.SG[this.v].length) return this.SG[this.v][this.index]
     return -1
   }
 
   next() {
     this.index++
-    if (this.index < this.SG.length) {
-      return this.SG[this.index]
+    if (this.index < this.SG[this.v].length) {
+      return this.SG[this.v][this.index]
     }
     return -1
   }
 
   end() {
-    return this.index >= this.SG.length
+    return this.index >= this.SG[this.v].length
   }
 }
 

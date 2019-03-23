@@ -4,6 +4,31 @@
  *
  */
 
+// 建立迭代器
+class adjIterator {
+  constructor(DG, v) {
+    this.DG = DG.g // 图实例
+    this.v = v // 定点个数
+    this.index = -1 // 迭代的序数，默认是-1
+  }
+
+  begin() {
+    this.index = -1
+    return this.next()
+  }
+
+  next() {
+    for (this.index += 1; this.index < this.DG[this.v].length; this.index++) {
+      if (this.DG[this.v][this.index]) return this.index
+    }
+    return -1
+  }
+
+  end() {
+    return this.index >= this.DG[this.v].length
+  }
+}
+
 class DenseGraph {
   constructor(n, directed) {
     this.n = n // 定点个数
@@ -27,8 +52,8 @@ class DenseGraph {
   // 添加边的方法
   // v, w 定点之间建立一条边
   addEdge(v, w) {
-    if (v < 0 || v > this.m) return
-    if (w < 0 || w > this.m) return
+    if (v < 0 && v > this.m) return
+    if (w < 0 && w > this.m) return
     if (this.hasEdge(v, w)) return
 
     this.g[v][w] = true
@@ -46,30 +71,9 @@ class DenseGraph {
 
     return this.g[v][w]
   }
-}
 
-// 建立迭代器
-class adjIterator {
-  constructor(DG, v) {
-    this.DG = DG // 图实例
-    this.v = v // 定点个数
-    this.index = -1 // 迭代的序数，默认是-1
-  }
-
-  begin() {
-    this.index = -1
-    return this.next()
-  }
-
-  next() {
-    for (this.index += 1; this.index < this.DG[this.v].length; this.index++) {
-      if (this.DG[this.v][this.index]) return this.index
-    }
-    return -1
-  }
-
-  end() {
-    return this.index >= this.DG[this.v].length
+  adjIterator(dg, n) {
+    return new adjIterator(dg, n)
   }
 }
 
